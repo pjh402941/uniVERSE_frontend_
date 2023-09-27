@@ -78,7 +78,7 @@ const Intro = styled.div`
   font-weight: 400;
   line-height: normal;
   text-align: left;
-  margin-top: 7px;
+  margin-top: 40px;
   overflow: hidden; /* 내용이 영역을 넘어갈 경우 숨김 처리 */
 `;
 const BoothintroContent = styled.div`
