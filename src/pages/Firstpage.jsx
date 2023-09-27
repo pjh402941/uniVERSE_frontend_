@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 // yarn add aos 설치하기
 import AOS from "aos";
 import "aos/dist/aos.css";
+import "./Star.css"; // CSS 파일 임포트
 
 const Container = styled.div`
   display: flex;
@@ -78,6 +79,33 @@ const Body = styled.div`
   }
 `;
 
+// 별 클래스
+class Starr {
+  constructor() {
+    this.x = 0;
+    this.y = 0;
+    this.size = 0;
+    this.time = 0;
+  }
+  set() {
+    this.x = Math.random() * 1500; //가로영역
+    this.y = Math.random() * 2500; //세로 영역
+    this.size = Math.random() * 20; // 별 크기
+    this.time = Math.random() * 7;
+
+    const background = document.getElementById("main");
+    const starDiv = document.createElement("div");
+    starDiv.className = "star"; // CSS 클래스 이름 설정
+
+    starDiv.style.left = this.x + "px";
+    starDiv.style.top = this.y + "px";
+    starDiv.style.width = this.size + "px";
+    starDiv.style.height = this.size + "px";
+
+    background.appendChild(starDiv);
+  }
+}
+
 const Firstpage = () => {
   const navigate = useNavigate();
 
@@ -108,6 +136,15 @@ const Firstpage = () => {
     });
   });
 
+  // 별 애니메이션
+  useEffect(() => {
+    for (let i = 0; i < 70; i++) {
+      // 별 개수 여기서 조정하면 돼요!!
+      const newStar = new Starr();
+      newStar.set();
+    }
+  }, []);
+
   return (
     <motion.div
       /* 2. 원하는 애니메이션으로 jsx를 감싸준다 */
@@ -115,7 +152,7 @@ const Firstpage = () => {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
     >
-      <Container>
+      <Container id="main">
         <Body>
           <div className="logo" style={{ height: "190px", marginTop: "30px" }}>
             {/* 로고 부분 */}
