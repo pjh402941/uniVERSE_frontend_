@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
+import axios from "axios";
+
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -128,6 +130,8 @@ const Count = styled.div`
   padding-left: 17px;
 `;
 const BoothWrapper = styled.div`
+  cursor: pointer;
+  position: relative;
   border-radius: 14px;
   border: 1px solid #4fdfff;
   background: linear-gradient(
@@ -149,14 +153,14 @@ const BoothWrapper = styled.div`
   }
 `;
 const BoothPic = styled.div`
-  width: 91px;
-  height: 91px;
+  width: 95px;
+  height: 95px;
   display: inline-block;
-  border-radius: 14px;
-  border: 1px solid #4fdfff;
+  left: -2px;
+  margin-left: -2px;
+  margin-top: 3px;
 `;
 const BoothContent = styled.div`
-  display: inline-block;
   margin-right: auto;
   padding-left: 16px;
   width: 65%;
@@ -174,16 +178,12 @@ const BoothName = styled.div`
 `;
 const Boothintro = styled.div`
   color: #fff;
-  font-size: 8px;
-  font-weight: 400;
+  font-size: 4px;
+  font-weight: 100;
   text-align: left;
-  margin-top: 8px;
-  width: 100%;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
+  position: absolute;
+  top: 30px;
+  padding-right: 10px;
 `;
 
 const Footer = styled.div`
@@ -249,14 +249,30 @@ const Right = styled.div`
 const BoothSearchSuccess = () => {
   const navigate = useNavigate();
   const navigateToBack = () => {
-    navigate(-1);
+    navigate("/BoothSearch");
+  };
+  const handleOnKeyPress = (e) => {
+    if (e.key === "Enter") {
+      handleNameButtonClick(); // Enter 입력이 되면 클릭 이벤트 실행
+    }
   };
 
   // 기본 클릭 요소 설정
   const [clickedElement, setClickedElement] = useState("four");
+  const [category, setCategory] = useState("day1"); // 초기값을 "day1"로 설정
 
   const handleElementClick = (element) => {
     setClickedElement(element);
+    setCategory((prevCategory) => {
+      if (element === "four") {
+        return "day1";
+      } else if (element === "five") {
+        return "day2";
+      } else if (element === "six") {
+        return "day3";
+      }
+      return prevCategory;
+    });
   };
 
   useEffect(() => {
@@ -285,19 +301,26 @@ const BoothSearchSuccess = () => {
                 src={`${process.env.PUBLIC_URL}/images/backbtn.png`}
                 width="24px"
                 height="24px"
-                onClick={() => navigateToBack()}
+                onClick={navigateToBack}
+                alt="뒤로 가기"
               />
             </Back>
             <Toptitle>부스 배치도</Toptitle>
           </Topbar>
           <Body>
             <SearchWrapper>
-              <Search placeholder="부스 이름을 검색하세요." />
-              <SearchButton>
+              <Search
+                placeholder="부스 이름을 검색하세요."
+                value={name}
+                onChange={handleNameInputChange}
+                onKeyPress={handleOnKeyPress}
+              />
+              <SearchButton onClick={handleNameButtonClick}>
                 <img
                   src={`${process.env.PUBLIC_URL}/images/search-button.png`}
                   width="17px"
                   height="17px"
+                  alt="검색"
                 />
               </SearchButton>
             </SearchWrapper>
@@ -305,7 +328,9 @@ const BoothSearchSuccess = () => {
               <DateWrapper>
                 <Four
                   style={getBorderStyle("four")}
-                  onClick={() => handleElementClick("four")}
+                  onClick={() => {
+                    handleElementClick("four");
+                  }}
                 >
                   04/WED
                 </Four>
@@ -319,7 +344,7 @@ const BoothSearchSuccess = () => {
                   style={getBorderStyle("six")}
                   onClick={() => handleElementClick("six")}
                 >
-                  09/FRI
+                  06/FRI
                 </Six>
               </DateWrapper>
               <Line>
@@ -407,4 +432,5 @@ const BoothSearchSuccess = () => {
     </motion.div>
   );
 };
+
 export default BoothSearchSuccess;
