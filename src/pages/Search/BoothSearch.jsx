@@ -144,6 +144,7 @@ const BoothWrapper = styled.div`
   &:first-child {
     margin-top: 0px;
   }
+  cursor: pointer;
 `;
 const BoothPic = styled.div`
   width: 95px;
