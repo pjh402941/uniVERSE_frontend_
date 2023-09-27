@@ -104,23 +104,29 @@ const Right = styled.div`
 const TopBar = styled.div`
   display: flex;
   justify-content: space-between;
-  height: 60px;
-  padding: 10px;
+  height: 70px;
+  padding-left: 20px;
+  box-sizing: border-box;
+  margin-bottom: 5px;
   align-items: center;
 `;
 
 const Back = styled.div`
   width: 24px;
   cursor: pointer;
+  position: absolute;
+  left: 27px;
 `;
 
 const Title = styled.div`
   color: #fff;
   font-family: SUIT;
-  font-size: 24px;
+  font-size: 20px;
   font-style: normal;
   font-weight: 700;
   line-height: normal;
+  padding-bottom: 5px;
+  margin: auto;
 `;
 
 const None = styled.div`

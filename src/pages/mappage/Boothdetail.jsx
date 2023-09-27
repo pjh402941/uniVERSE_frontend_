@@ -34,7 +34,7 @@ const Body = styled.div`
 const Topbar = styled.div`
   display: flex;
   justify-content: space-between;
-  height: 86px;
+  height: 70px;
   align-items: center;
   padding-left: 12px;
 `;
@@ -55,7 +55,7 @@ const Boothinfo = styled.div`
 `;
 const Boothname = styled.div`
   width: 310px;
-  height: 34.614px;
+  height: 100%;
   flex-shrink: 0;
   color: #4fdfff;
   font-family: SUIT;
@@ -104,6 +104,8 @@ const Time = styled.div`
 `;
 const Time_detail = styled.div`
   height: 22px;
+  height: 22px;
+  width: 87%;
   flex-shrink: 0;
   color: #4fdfff;
   font-family: SUIT;
@@ -112,7 +114,8 @@ const Time_detail = styled.div`
   font-weight: 400;
   line-height: normal;
   margin-left: 10px;
-  margin-top: -2px;
+  /* margin-top: -2px; */
+  /* margin-bottom: 10px;
 `;
 const Place = styled.div`
   height: 34.614px;
@@ -125,6 +128,7 @@ const Place = styled.div`
   line-height: normal;
   text-align: left;
   display: flex;
+  margin-top: 10px;
 `;
 const Place_detail = styled.div`
   width: 310px;
@@ -225,7 +229,7 @@ const Boothdetail = () => {
   return (
     // 다른 페이지로 자연스럽게 넘어가기 위해 추가함
     <motion.div
-      initial={{ scale: 0 }}
+      initial={{ scale: 0.5 }}
       animate={{ scale: 1 }}
       transition={{
         type: "spring",

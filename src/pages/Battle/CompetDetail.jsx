@@ -98,19 +98,19 @@ const Right = styled.div`
 
 // 추가
 const PageTitle = styled.div`
-  position: relative;
-  margin: auto;
   color: #fff;
-  font-family: SUIT;
-  font-size: 24px;
+  cursor: pointer;
+  margin: auto;
+  font-size: 20px;
   font-style: normal;
-  font-weight: 700;
+  font-weight: 600;
   line-height: normal;
+  padding-bottom: 5px;
 `;
 const BackBtn = styled.div`
+  cursor: pointer;
   position: absolute;
-  left: 5%;
-  top: 30%;
+  left: 27px;
 `;
 const TitleBar = styled.div`
   position: relative;
@@ -118,6 +118,7 @@ const TitleBar = styled.div`
   flex-direction: row;
   gap: 17px;
   justify-content: center;
+  margin-top: 10px;
 `;
 const TitleBarText = styled.div`
   position: absolute;
@@ -193,13 +194,19 @@ const RankPercent2 = styled.div`
   line-height: normal;
 `;
 const Box = styled.div`
-  position: relative;
-  width: 100%;
-  margin-top: 30px;
-  margin-bottom: 39px;
-  height: 50px;
   display: flex;
   justify-content: space-between;
+  height: 70px;
+  margin-bottom: 5px;
+  box-sizing: border-box;
+  align-items: center;
+  padding-left: 12px;  display: flex;
+  justify-content: space-between;
+  height: 70px;
+  margin-bottom: 5px;
+  box-sizing: border-box;
+  align-items: center;
+  padding-left: 12px;backbtn
 `;
 
 const TopBox = styled.div`

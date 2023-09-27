@@ -38,16 +38,29 @@ const Container = styled.div`
   }
 `;
 
-const Backbtn = styled.div`
-  position: relative;
-
-  margin-top: 33px;
-  margin-right: 315px;
-
-  z-index: 5;
-  :hover {
-    cursor: pointer;
-  }
+const Topbar = styled.div`
+  display: flex;
+  justify-content: space-between;
+  height: 70px;
+  margin-bottom: 5px;
+  box-sizing: border-box;
+  align-items: center;
+  padding-left: 8px;
+`;
+const Back = styled.div`
+  cursor: pointer;
+  position: absolute;
+  left: 27px;
+`;
+const Toptitle = styled.div`
+  color: #fff;
+  cursor: pointer;
+  margin: auto;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  padding-bottom: 5px;
 `;
 
 const Title = styled.div`
@@ -247,15 +260,17 @@ const Guestbook = () => {
     <>
       <GlobalStyle />
       <Container>
-        <Backbtn>
-          <img
-            src={`${process.env.PUBLIC_URL}/images/backbtn.png`}
-            alt="backbtn"
-            width="26px"
-            onClick={GoBack}
-          />
-        </Backbtn>
-        <Title>방명록</Title>
+        <Topbar>
+          <Back>
+            <img
+              src={`${process.env.PUBLIC_URL}/images/backbtn.png`}
+              width="24px"
+              height="24px"
+              onClick={() => GoBack()}
+            />
+          </Back>
+          <Toptitle>방명록</Toptitle>
+        </Topbar>
         <CommentWrapper>
           <img
             src={`${process.env.PUBLIC_URL}/images/cmtwrapper.png`}

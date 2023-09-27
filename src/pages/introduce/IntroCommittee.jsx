@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 
 const Container = styled.div`
   align-items: center;
@@ -27,35 +28,33 @@ const Container = styled.div`
   }
 `;
 // 상단
-const TopContainer = styled.div`
-  margin-top: 6px;
-  /*기본스타일*/
-  width: 100%;
-  height: 60px;
+const Topbar = styled.div`
+  display: flex;
+  justify-content: space-between;
+  height: 70px;
+  margin-bottom: 5px;
+  box-sizing: border-box;
+  align-items: center;
+  padding-left: 20px;
 `;
-const GoBack = styled.img`
-  position: relative;
-  width: 25px;
-  top: 10px;
-  left: -37%;
+const Back = styled.div`
+  cursor: pointer;
+  position: absolute;
+  left: 27px;
 `;
-const TopText = styled.span`
-design: flex
-  margin: 0px auto;
-  width: 60px;
-  height: 40px;
-  top: 2px;
+const Toptitle = styled.div`
   color: #fff;
-  font-family: SUIT;
-  font-size: 18px;
+  cursor: pointer;
+  margin: auto;
+  font-size: 20px;
   font-style: normal;
-  font-weight: 900;
+  font-weight: 600;
   line-height: normal;
+  padding-bottom: 5px;
 `;
 
 const BodyWrapper = styled.div`
   min-height: calc(100vh - 151px); //푸터 공간 확보
-  padding-top: 18px;
 `;
 
 const TopIndex = styled.div`
@@ -211,6 +210,9 @@ const Right = styled.div`
 
 const IntroCommittee = () => {
   const navigate = useNavigate();
+  const GoBack = () => {
+    navigate("/");
+  };
 
   const GoFestival = () => {
     // 버튼을 클릭할 때 페이지 이동을 수행합니다.
@@ -247,98 +249,113 @@ const IntroCommittee = () => {
 
   return (
     <Container>
-      <TopContainer>
-        <GoBack
-          src={`${process.env.PUBLIC_URL}/images/top-backBtn.png`}
-        ></GoBack>
-        <TopText>소개</TopText>
-      </TopContainer>
-
-      <BodyWrapper>
-        <div style={{ margin: "0px auto", position: "relative" }}>
-          <TopIndex>
-            <Index1 onClick={GoFestival}>축제</Index1>
-            <Index2>축.운.위</Index2>
-            <Index3 onClick={GoLion}>멋사 11기</Index3>
-          </TopIndex>
-
-          <NameCode
-            style={{
-              top: "7.7%", //absolute 쓸거면 top은 %로
-              position: "absolute",
-              left: "14%",
-              // transform: "translateX(-30%)",
-            }}
-          >
-            동덕여자대학교 축제운영위원회
-          </NameCode>
-
-          <InstagramBox>
-            <span style={instagramText}>instagram</span>
-            <a
-              style={linkStyle}
-              href="https://instagram.com/ddwu.festival2023?igshid=MzRlODBiNWFlZA=="
-              target="_blank"
-            >
-              @ddwu.festival2023
-            </a>
-          </InstagramBox>
-
-          <TopBox>
-            <img
-              src={`${process.env.PUBLIC_URL}/images/CommitLogo.png`}
-              width="73%"
-              style={{ marginTop: "22%" }}
-            />
-          </TopBox>
-
-          <ContentBox>
-            <C1>축제운영위원회</C1>
-            <C2>는</C2>
-            <C3>
-              전 재학생을 위해 대동제를 비롯한 문화사업 운영 업무를 총괄하는
-              <br />
-              특별기구입니다.
-              <C3>
-                축제운영위원회는{" "}
-                <strong>
-                  위원장단, 기획국, 무대국, 사무국, 행사국, 홍보국
-                </strong>
-                <br />
-                으로 이루어져 있으며,
-                <br /> <strong>37명의 구성원</strong>이 3기 국원으로 활동하고
-                있습니다.
-              </C3>
-              <C3>
-                올해부터는 대동제 뿐만 아니라 매월 ‘오솜도솜데이’라는
-                <br /> 월간 문화 사업을 진행하고 있습니다.
-                <br />
-                <strong>‘오솜도솜데이’</strong>는 학우들에게 다양한 문화와
-                관련된 즐길거리를
-                <br />
-                제공하고 있습니다.
-                <br /> 지난 4월 오솜도솜데이에서는 학우들의 폴라로이드 사진을
-                찍어주고
-                <br /> 직접 스티커로 꾸미는 ‘솜라로이드 러브’ 행사를 진행하였고,
-                <br /> 5월 오솜도솜데이에서는 다가오는 더위를 맞아
-                <br /> 퀴즈를 맞히는 학우들에게 시원한 슬러시를 배부하는
-                ‘동동매점’ 행사를
-                <br />
-                진행하였습니다.
-              </C3>
-              <br /> 또한 3기에서는 영상팀이 신설되어 축운위의 행사 진행 모습이
-              <br /> 생생하게 담긴 VLOG 영상도 공개 예정이니 많은 관심
-              부탁드립니다!
-            </C3>
-          </ContentBox>
-
+      <Topbar>
+        <Back>
           <img
-            src={`${process.env.PUBLIC_URL}/images/FrameCommittee.png`}
-            style={{ maxWidth: "88%", height: "auto" }}
+            src={`${process.env.PUBLIC_URL}/images/backbtn.png`}
+            width="24px"
+            height="24px"
+            onClick={() => GoBack()}
           />
-        </div>
-      </BodyWrapper>
+        </Back>
+        <Toptitle>소개</Toptitle>
+      </Topbar>
+      <motion.div
+        initial={{ scale: 0.8 }}
+        animate={{ scale: 1 }}
+        transition={{
+          type: "spring",
+          stiffness: 260,
+          damping: 20,
+        }}
+      >
+        <BodyWrapper>
+          <div style={{ margin: "0px auto", position: "relative" }}>
+            <TopIndex>
+              <Index1 onClick={GoFestival}>축제</Index1>
+              <Index2>축.운.위</Index2>
+              <Index3 onClick={GoLion}>멋사 11기</Index3>
+            </TopIndex>
 
+            <NameCode
+              style={{
+                top: "7.7%", //absolute 쓸거면 top은 %로
+                position: "absolute",
+                left: "14%",
+                // transform: "translateX(-30%)",
+              }}
+            >
+              동덕여자대학교 축제운영위원회
+            </NameCode>
+
+            <InstagramBox>
+              <span style={instagramText}>instagram</span>
+              <a
+                style={linkStyle}
+                href="https://instagram.com/ddwu.festival2023?igshid=MzRlODBiNWFlZA=="
+                target="_blank"
+              >
+                @ddwu.festival2023
+              </a>
+            </InstagramBox>
+
+            <TopBox>
+              <img
+                src={`${process.env.PUBLIC_URL}/images/CommitLogo.png`}
+                width="73%"
+                style={{ marginTop: "22%" }}
+              />
+            </TopBox>
+
+            <ContentBox>
+              <C1>축제운영위원회</C1>
+              <C2>는</C2>
+              <C3>
+                전 재학생을 위해 대동제를 비롯한 문화사업 운영 업무를 총괄하는
+                <br />
+                특별기구입니다.
+                <C3>
+                  축제운영위원회는{" "}
+                  <strong>
+                    위원장단, 기획국, 무대국, 사무국, 행사국, 홍보국
+                  </strong>
+                  <br />
+                  으로 이루어져 있으며,
+                  <br /> <strong>37명의 구성원</strong>이 3기 국원으로 활동하고
+                  있습니다.
+                </C3>
+                <C3>
+                  올해부터는 대동제 뿐만 아니라 매월 ‘오솜도솜데이’라는
+                  <br /> 월간 문화 사업을 진행하고 있습니다.
+                  <br />
+                  <strong>‘오솜도솜데이’</strong>는 학우들에게 다양한 문화와
+                  관련된 즐길거리를
+                  <br />
+                  제공하고 있습니다.
+                  <br /> 지난 4월 오솜도솜데이에서는 학우들의 폴라로이드 사진을
+                  찍어주고
+                  <br /> 직접 스티커로 꾸미는 ‘솜라로이드 러브’ 행사를
+                  진행하였고,
+                  <br /> 5월 오솜도솜데이에서는 다가오는 더위를 맞아
+                  <br /> 퀴즈를 맞히는 학우들에게 시원한 슬러시를 배부하는
+                  ‘동동매점’ 행사를
+                  <br />
+                  진행하였습니다.
+                </C3>
+                <br /> 또한 3기에서는 영상팀이 신설되어 축운위의 행사 진행
+                모습이
+                <br /> 생생하게 담긴 VLOG 영상도 공개 예정이니 많은 관심
+                부탁드립니다!
+              </C3>
+            </ContentBox>
+
+            <img
+              src={`${process.env.PUBLIC_URL}/images/FrameCommittee.png`}
+              style={{ maxWidth: "88%", height: "auto" }}
+            />
+          </div>
+        </BodyWrapper>
+      </motion.div>
       <Footer>
         <Left>
           <img
