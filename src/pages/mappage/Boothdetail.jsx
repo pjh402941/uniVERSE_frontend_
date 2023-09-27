@@ -336,4 +336,4 @@ const Boothdetail = () => {
     </motion.div>
   );
 };
-export default Mappage3;
+export default Boothdetail;
