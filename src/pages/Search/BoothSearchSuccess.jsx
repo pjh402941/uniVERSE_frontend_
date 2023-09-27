@@ -162,15 +162,19 @@ const BoothPic = styled.div`
 `;
 const BoothContent = styled.div`
   margin-right: auto;
-  padding-left: 12px;
+  padding-left: 16px;
+  width: 65%;
+  padding-bottom: 18px;
 `;
 const BoothName = styled.div`
   color: #4fdfff;
-  font-size: 16px;
+  width: 100%;
+  font-size: 18px;
   font-weight: 700;
   text-align: left;
-  position: absolute;
-  top: 8px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 const Boothintro = styled.div`
   color: #fff;
@@ -245,7 +249,7 @@ const Right = styled.div`
 const BoothSearchSuccess = () => {
   const navigate = useNavigate();
   const navigateToBack = () => {
-    navigate(-1);
+    navigate("/BoothSearch");
   };
   const handleOnKeyPress = (e) => {
     if (e.key === "Enter") {
@@ -272,10 +276,8 @@ const BoothSearchSuccess = () => {
   };
 
   useEffect(() => {
-    // category가 변경될 때 실행될 작업을 여기에 넣으세요
-    console.log("useeffect 됨");
-    handleNameButtonClick(); // 예를 들어, handleNameButtonClick 호출
-  }, [category]); // category가 변경될 때만 이 useEffect가 실행됩니다.
+    setClickedElement("four");
+  }, []);
 
   const getBorderStyle = (element) => ({
     color: "#FFF",
@@ -284,80 +286,6 @@ const BoothSearchSuccess = () => {
     cursor: "pointer",
   });
 
-  const [name, setName] = useState("");
-  const [booths, setBooths] = useState([]);
-  const [boothCount, setboothCount] = useState([]);
-  const BACKEND_URL = "http://127.0.0.1:8000"; // 실제 백엔드 서버 주소로 변경해야 합니다.
-
-  const handleNameInputChange = (event) => {
-    setName(event.target.value);
-  };
-
-  // 검색 버튼 클릭 시 검색어를 사용하여 API 호출
-  const handleNameButtonClick = () => {
-    const encodedName = encodeURIComponent(name);
-    const encodedCategory = encodeURIComponent(category);
-    console.log("handleNameButtonClick 됨");
-    console.log("handleNameButtonClick 됨 :", name);
-    console.log("handleNameButtonClick 됨", category);
-    if (encodedName) {
-      console.log("name 안에 들어와짐");
-      axios
-        .get(`${BACKEND_URL}/booth-search`, {
-          params: {
-            name: name,
-            category: category,
-          },
-        })
-        .then(function (result) {
-          navigate(
-            `/BoothSearchSuccess/?name=${encodedName}&category=${encodedCategory}`
-          );
-          setBooths(result.data.results);
-          setboothCount(result.data.resultsCount);
-          console.log(result.data.results);
-          console.log(category);
-        })
-        .catch(function (error) {
-          setBooths({});
-          setboothCount(0);
-          console.error("에러 발생 : ", error);
-        });
-    }
-  };
-
-  const location = useLocation();
-  useEffect(() => {
-    const searchParams = new URLSearchParams(location.search);
-    const nameParam = searchParams.get("name");
-    console.log("nameParam 들어옴", nameParam);
-    if (nameParam) {
-      setName(nameParam);
-    }
-  }, [location.search]);
-
-  useEffect(() => {
-    if (name !== "" && booths.length === 0) {
-      // booths가 비어있을 때만 실행
-      console.log("name 변경함", name);
-      handleNameButtonClick();
-      // 여기에서 다른 로직을 실행할 수 있습니다.
-    }
-  }, [name, booths]);
-
-  const imgStyle = {
-    borderRadius: "14px",
-    border: "1px solid #4fdfff",
-  };
-  const failStyle = {
-    marginTop: "35px",
-    marginBottom: "19px",
-    color: "#4fdfff",
-    fontSize: "14px",
-    fontWeight: "400",
-    textAlign: "left",
-    paddingLeft: "17px",
-  };
   return (
     // 다른 페이지로 자연스럽게 넘어가기 위해 추가함
     <motion.div
@@ -428,35 +356,20 @@ const BoothSearchSuccess = () => {
                 />
               </Line>
               <ContentBox>
-                {boothCount === 0 ? (
-                  <p style={failStyle}>검색 결과가 없습니다.</p>
-                ) : (
-                  <div>
-                    <Count>총 {boothCount}개의 이벤트</Count>
-                    {booths.map((booth) => (
-                      <BoothWrapper
-                        key={booth.boothId}
-                        onClick={() =>
-                          navigate(`/booth-detail/${booth.boothId}/`)
-                        }
-                      >
-                        <BoothPic>
-                          <img
-                            src={`${BACKEND_URL}${booth.image}`}
-                            alt={booth.name}
-                            width="91px"
-                            height="91px"
-                            style={imgStyle}
-                          />
-                        </BoothPic>
-                        <BoothContent>
-                          <BoothName>{booth.name}</BoothName>
-                          <Boothintro>{booth.introduce}원</Boothintro>
-                        </BoothContent>
-                      </BoothWrapper>
-                    ))}
-                  </div>
-                )}
+                <Count>총 1개의 이벤트</Count>
+                <BoothWrapper>
+                  <BoothPic>
+                    <img
+                      src={`${process.env.PUBLIC_URL}/images/BoothPic-sample.png`}
+                      width="91px"
+                      height="91px"
+                    />
+                  </BoothPic>
+                  <BoothContent>
+                    <BoothName>검색결과1</BoothName>
+                    <Boothintro>검색결과설명1</Boothintro>
+                  </BoothContent>
+                </BoothWrapper>
               </ContentBox>
             </ContentWrapper>
           </Body>

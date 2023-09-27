@@ -26,6 +26,7 @@ const Container = styled.div`
 `;
 const BodyWrapper = styled.div`
   min-height: calc(100vh - 151px); //푸터 공간 확보
+  padding-bottom: 60px;
 `;
 
 const Topbar = styled.div`
@@ -122,6 +123,7 @@ const ContentBox = styled.div`
   margin-bottom: 19px;
 `;
 const BoothWrapper = styled.div`
+  cursor: pointer;
   position: relative;
   border-radius: 14px;
   border: 1px solid #4fdfff;
@@ -154,15 +156,18 @@ const BoothPic = styled.div`
 `;
 const BoothContent = styled.div`
   margin-right: auto;
-  padding-left: 12px;
+  padding-left: 8px;
 `;
 const BoothName = styled.div`
   color: #4fdfff;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 700;
   text-align: left;
   position: absolute;
   top: 8px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 `;
 const Boothintro = styled.div`
   color: #fff;

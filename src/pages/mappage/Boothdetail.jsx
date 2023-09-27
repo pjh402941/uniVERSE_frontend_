@@ -51,7 +51,6 @@ const Boothimg = styled.div`
 const Boothinfo = styled.div`
   margin: 0 auto;
   width: 300px;
-  margin-bottom: 7%;
 `;
 const Boothname = styled.div`
   width: 310px;
@@ -78,12 +77,6 @@ const Intro = styled.div`
   font-weight: 400;
   line-height: normal;
   text-align: left;
-  margin-top: 40px;
-  overflow: hidden; /* 내용이 영역을 넘어갈 경우 숨김 처리 */
-`;
-const BoothintroContent = styled.div`
-  height: 100%;
-  overflow-y: auto; /* 세로 스크롤바 표시 */
 `;
 const Detail_detail = styled.div`
   margin-left: 10px;
@@ -103,7 +96,6 @@ const Time = styled.div`
   display: flex;
 `;
 const Time_detail = styled.div`
-  width: 210px;
   height: 22px;
   flex-shrink: 0;
   color: #4fdfff;
@@ -116,7 +108,6 @@ const Time_detail = styled.div`
   margin-top: -2px;
 `;
 const Place = styled.div`
-  margin-top: 20px;
   width: 310px;
   height: 34.614px;
   flex-shrink: 0;
@@ -228,9 +219,13 @@ const Boothdetail = () => {
   return (
     // 다른 페이지로 자연스럽게 넘어가기 위해 추가함
     <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
+      initial={{ scale: 0 }}
+      animate={{ scale: 1 }}
+      transition={{
+        type: "spring",
+        stiffness: 260,
+        damping: 20,
+      }}
     >
       <Container>
         <BodyWrapper>
@@ -341,4 +336,4 @@ const Boothdetail = () => {
     </motion.div>
   );
 };
-export default Boothdetail;
+export default Mappage3;
