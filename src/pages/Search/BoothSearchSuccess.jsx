@@ -183,8 +183,14 @@ const Boothintro = styled.div`
   position: absolute;
   top: 30px;
   padding-right: 10px;
+  padding-top: 6px;
+  height: 50px;
+  overflow: hidden; /* 내용이 영역을 넘어갈 경우 숨김 처리 */
 `;
-
+const BoothintroContent = styled.div`
+  height: 100%;
+  overflow-y: auto; /* 세로 스크롤바 표시 */
+`;
 const Footer = styled.div`
   height: 150px;
   position: relative;
@@ -255,6 +261,21 @@ const BoothSearchSuccess = () => {
       handleNameButtonClick(); // Enter 입력이 되면 클릭 이벤트 실행
     }
   };
+  const loadingimg = {
+    margin: "0 auto",
+    width: "10%",
+    height: "10%",
+  };
+  const loadingStyle = {
+    margin: "0 auto",
+    display: "flex",
+    justifyContent: "center",
+    alignContent: "center",
+    alignItems: "center",
+    width: "100%",
+    height: "100vh",
+  };
+  const [loading, setLoading] = useState(true);
 
   // 기본 클릭 요소 설정
   const [clickedElement, setClickedElement] = useState("four");
@@ -315,11 +336,13 @@ const BoothSearchSuccess = () => {
           setboothCount(result.data.resultsCount);
           console.log(result.data.results);
           console.log(category);
+          setLoading(false);
         })
         .catch(function (error) {
           setBooths({});
           setboothCount(0);
           console.error("에러 발생 : ", error);
+          setLoading(false);
         });
     }
   };
@@ -375,6 +398,7 @@ const BoothSearchSuccess = () => {
             </Back>
             <Toptitle>부스 배치도</Toptitle>
           </Topbar>
+
           <Body>
             <SearchWrapper>
               <Search
@@ -423,37 +447,56 @@ const BoothSearchSuccess = () => {
                   alt="footer"
                 />
               </Line>
-              <ContentBox>
-                {boothCount === 0 ? (
-                  <p style={failStyle}>검색 결과가 없습니다.</p>
-                ) : (
-                  <div>
-                    <Count>총 {boothCount}개의 이벤트</Count>
-                    {booths.map((booth) => (
-                      <BoothWrapper
-                        key={booth.boothId}
-                        onClick={() =>
-                          navigate(`/booth-detail/${booth.boothId}/`)
-                        }
-                      >
-                        <BoothPic>
-                          <img
-                            src={`${BACKEND_URL}${booth.image}`}
-                            alt={booth.name}
-                            width="91px"
-                            height="91px"
-                            style={imgStyle}
-                          />
-                        </BoothPic>
-                        <BoothContent>
-                          <BoothName>{booth.name}</BoothName>
-                          <Boothintro>{booth.introduce}</Boothintro>
-                        </BoothContent>
-                      </BoothWrapper>
-                    ))}
-                  </div>
-                )}
-              </ContentBox>
+              {loading ? (
+                <div style={loadingStyle}>
+                  <img
+                    src="/images/loading.gif"
+                    alt="로딩 중"
+                    width="50px"
+                    height="50px"
+                    style={loadingimg}
+                  />
+                </div>
+              ) : (
+                <>
+                  <ContentBox>
+                    {boothCount === 0 ? (
+                      <p style={failStyle}>검색 결과가 없습니다.</p>
+                    ) : (
+                      <div>
+                        <Count>총 {boothCount}개의 이벤트</Count>
+                        {booths.map((booth) => (
+                          <BoothWrapper
+                            key={booth.boothId}
+                            onClick={() =>
+                              navigate(`/booth-detail/${booth.boothId}/`)
+                            }
+                          >
+                            <BoothPic>
+                              <img
+                                src={`${BACKEND_URL}${booth.image}`}
+                                alt={booth.name}
+                                width="91px"
+                                height="91px"
+                                style={imgStyle}
+                              />
+                            </BoothPic>
+                            <BoothContent>
+                              <BoothName>{booth.name}</BoothName>
+                              <Boothintro>
+                                {" "}
+                                <BoothintroContent>
+                                  {booth.introduce}
+                                </BoothintroContent>
+                              </Boothintro>
+                            </BoothContent>
+                          </BoothWrapper>
+                        ))}
+                      </div>
+                    )}
+                  </ContentBox>
+                </>
+              )}
             </ContentWrapper>
           </Body>
         </BodyWrapper>
