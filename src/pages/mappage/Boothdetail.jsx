@@ -51,6 +51,7 @@ const Boothimg = styled.div`
 const Boothinfo = styled.div`
   margin: 0 auto;
   width: 300px;
+  margin-bottom: 50px;
 `;
 const Boothname = styled.div`
   width: 310px;
@@ -77,6 +78,12 @@ const Intro = styled.div`
   font-weight: 400;
   line-height: normal;
   text-align: left;
+  margin-top: 40px;
+  overflow: hidden; /* 내용이 영역을 넘어갈 경우 숨김 처리 */
+`;
+const BoothintroContent = styled.div`
+  height: 100%;
+  overflow-y: auto; /* 세로 스크롤바 표시 */
 `;
 const Detail_detail = styled.div`
   margin-left: 10px;
@@ -108,7 +115,6 @@ const Time_detail = styled.div`
   margin-top: -2px;
 `;
 const Place = styled.div`
-  width: 310px;
   height: 34.614px;
   flex-shrink: 0;
   color: #fff;
