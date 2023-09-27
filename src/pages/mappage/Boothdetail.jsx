@@ -207,10 +207,26 @@ const Boothdetail = () => {
     navigate(-1);
   };
 
+  const loadingimg = {
+    margin: "0 auto",
+    width: "10%",
+    height: "10%",
+  };
+  const loadingStyle = {
+    margin: "0 auto",
+    display: "flex",
+    justifyContent: "center",
+    alignContent: "center",
+    alignItems: "center",
+    width: "100%",
+    height: "100vh",
+  };
+
   //axios_backend 연동작업 시작
   const [Booth, setBooth] = useState([]);
   const { boothId } = useParams(); // 경로 파라미터 값 가져오기
   const BACKEND_URL = "http://127.0.0.1:8000";
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const apiUrl = `${BACKEND_URL}/booth-detail/${boothId}/`;
@@ -220,12 +236,13 @@ const Boothdetail = () => {
       .then((response) => {
         setBooth(response.data);
         console.log(response.data); // 부스 정보 확인
+        setLoading(false);
       })
       .catch((error) => {
         console.error("에러 발생: ", error);
+        setLoading(false);
       });
   }, [boothId]);
-
   return (
     // 다른 페이지로 자연스럽게 넘어가기 위해 추가함
     <motion.div
@@ -250,42 +267,56 @@ const Boothdetail = () => {
                 />
               </Back>
             </Topbar>
-            <BoothCon>
-              <Boothimg>
+            {loading ? (
+              <div style={loadingStyle}>
                 <img
-                  src={`${BACKEND_URL}${Booth.image}`}
-                  width="320px"
-                  height="320px"
-                  alt="boothimg"
+                  src="/images/loading.gif"
+                  alt="로딩 중"
+                  width="50px"
+                  height="50px"
+                  style={loadingimg}
                 />
-              </Boothimg>
-              <Boothinfo>
-                <Boothname>{Booth.name}</Boothname>
-                <Intro>
-                  <BoothintroContent> {Booth.introduce}</BoothintroContent>
-                </Intro>
-                <Detail_detail>
-                  <Time>
+              </div>
+            ) : (
+              <>
+                <BoothCon>
+                  <Boothimg>
                     <img
-                      src={`${process.env.PUBLIC_URL}/images/timeicon.png`}
-                      width="14px"
-                      height="17px"
-                      alt="timeicon"
+                      src={`${BACKEND_URL}${Booth.image}`}
+                      width="320px"
+                      height="320px"
+                      alt="boothimg"
                     />
-                    <Time_detail>{Booth.date}</Time_detail>
-                  </Time>
-                  <Place>
-                    <img
-                      src={`${process.env.PUBLIC_URL}/images/placeicon.png`}
-                      width="13.993px"
-                      height="17px"
-                      alt="placeicon"
-                    />
-                    <Place_detail>{Booth.place}</Place_detail>
-                  </Place>
-                </Detail_detail>
-              </Boothinfo>
-            </BoothCon>
+                  </Boothimg>
+                  <Boothinfo>
+                    <Boothname>{Booth.name}</Boothname>
+                    <Intro>
+                      <BoothintroContent> {Booth.introduce}</BoothintroContent>
+                    </Intro>
+                    <Detail_detail>
+                      <Time>
+                        <img
+                          src={`${process.env.PUBLIC_URL}/images/timeicon.png`}
+                          width="14px"
+                          height="17px"
+                          alt="timeicon"
+                        />
+                        <Time_detail>{Booth.date}</Time_detail>
+                      </Time>
+                      <Place>
+                        <img
+                          src={`${process.env.PUBLIC_URL}/images/placeicon.png`}
+                          width="13.993px"
+                          height="17px"
+                          alt="placeicon"
+                        />
+                        <Place_detail>{Booth.place}</Place_detail>
+                      </Place>
+                    </Detail_detail>
+                  </Boothinfo>
+                </BoothCon>
+              </>
+            )}
           </Body>
         </BodyWrapper>
         <Footer>
