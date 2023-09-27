@@ -3,6 +3,7 @@ import styled, { createGlobalStyle } from "styled-components";
 import { useNavigate } from "react-router-dom";
 import "./CustomScrollbar.css";
 import axios from "axios";
+import { motion } from "framer-motion";
 
 const GlobalStyle = createGlobalStyle`
   @font-face {
@@ -267,15 +268,30 @@ const Guestbook = () => {
               maxHeight: "900px",
             }}
           />
+
           <CommentBoxLine ref={commentRefs}>
             {commentsWithSomBox.map((item, index) => (
-              <div key={index}>
-                <StyledImage src={item.image} alt={`comment-image-${index}`} />
-                <StyledBox alt={`comment-box-${index}`}>
-                  <div className="comment-som">SomSom</div>
-                  <div className="comment-text">{item.text}</div>
-                </StyledBox>
-              </div>
+              <motion.div
+                key={index}
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                transition={{
+                  type: "spring",
+                  stiffness: 260,
+                  damping: 20,
+                }}
+              >
+                <div>
+                  <StyledImage
+                    src={item.image}
+                    alt={`comment-image-${index}`}
+                  />
+                  <StyledBox alt={`comment-box-${index}`}>
+                    <div className="comment-som">SomSom</div>
+                    <div className="comment-text">{item.text}</div>
+                  </StyledBox>
+                </div>
+              </motion.div>
             ))}
           </CommentBoxLine>
         </CommentWrapper>

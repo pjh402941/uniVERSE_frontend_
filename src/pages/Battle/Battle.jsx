@@ -4,9 +4,6 @@ import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
-import axios from "axios";
 
 const Container = styled.div`
   display: flex;
@@ -327,37 +324,59 @@ const Battle = () => {
       alert("올바른 학번을 입력하세요");
     }
   };
-
+  const container = {
+    hidden: { opacity: 1, scale: 0 },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: {
+        delayChildren: 0.3,
+        staggerChildren: 0.2,
+      },
+    },
+  };
+  const item = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+    },
+  };
+  const ulStyle = {
+    padding: "0",
+    listStyle: "none",
+  };
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-    >
-      <Container>
-        <TopBar>
-          <Back onClick={onClickBtn}>
+    <Container>
+      <TopBar>
+        <Back onClick={onClickBtn}>
+          <img
+            src={`${process.env.PUBLIC_URL}/images/backbtn.png`}
+            alt="back"
+            width="24px"
+          />
+        </Back>
+        <Title>단과 대항전</Title>
+        <None></None>
+      </TopBar>
+      <BodyWrapper>
+        <Body>
+          <TopBox>
             <img
-              src={`${process.env.PUBLIC_URL}/images/backbtn.png`}
+              src={`${process.env.PUBLIC_URL}/images/Union.png`}
               alt="back"
-              width="24px"
+              width="197.451px"
+              height="39.774px"
             />
-          </Back>
-          <Title>단과 대항전</Title>
-          <None></None>
-        </TopBar>
-        <BodyWrapper>
-          <Body>
-            <TopBox>
-              <img
-                src={`${process.env.PUBLIC_URL}/images/Union.png`}
-                alt="back"
-                width="197.451px"
-                height="39.774px"
-              />
-              <TopTitle>현재 참여율 TOP 3 단과대</TopTitle>
-            </TopBox>
-            <div>
+            <TopTitle>현재 참여율 TOP 3 단과대</TopTitle>
+          </TopBox>
+          <motion.ul
+            variants={container}
+            initial="hidden"
+            animate="visible"
+            style={ulStyle}
+          >
+            <motion.li variants={item}>
               <TopBox2>
                 <ImgBox>
                   <img src={`${process.env.PUBLIC_URL}/images/1stdept.svg`} />
@@ -370,6 +389,8 @@ const Battle = () => {
                   </RankPercent>
                 </TopText>
               </TopBox2>
+            </motion.li>
+            <motion.li variants={item}>
               <TopBox2>
                 <div>
                   <img src={`${process.env.PUBLIC_URL}/images/2nddept.svg`} />
@@ -382,6 +403,8 @@ const Battle = () => {
                   </RankPercent>
                 </TopText>
               </TopBox2>
+            </motion.li>
+            <motion.li variants={item}>
               <TopBox2>
                 <div>
                   <img src={`${process.env.PUBLIC_URL}/images/3rddept.svg`} />
@@ -394,98 +417,96 @@ const Battle = () => {
                   </RankPercent>
                 </TopText>
               </TopBox2>
-            </div>
-            <Check onClick={checkRanking}>순위 확인하기</Check>
-            <InputBox>
-              <College
-                value={selectedCollege}
-                onChange={(e) => setSelectedCollege(e.target.value)}
-              >
-                <option value="" disabled selected>
-                  단과대학을 선택하세요
-                </option>
-                <option value="college1">인문대학</option>
-                <option value="college2">사회과학대학</option>
-                <option value="college3">자연정보과학대학</option>
-                <option value="college4">약학대학</option>
-                <option value="college5">예술대학</option>
-                <option value="college6">디자인대학</option>
-                <option value="college7">공연예술대학</option>
-                <option value="college8">문화지식융합대학</option>
-                <option value="college9">미래인재융합대학</option>
-              </College>
-              <Input
-                type="text"
-                placeholder="학번"
-                id="number"
-                value={stuId}
-                onChange={(e) => setStuId(e.target.value)}
-              ></Input>
-            </InputBox>
-            <Explain>
-              참여율로 순위가 집계되며 축제기간동안 1회 참여 가능합니다.
-            </Explain>
-            <Participation onClick={onParticipationClick}>
-              참여하기
-            </Participation>
-          </Body>
-        </BodyWrapper>
-        <Footer>
-          <Left>
+            </motion.li>
+          </motion.ul>
+          <Check onClick={checkRanking}>순위 확인하기</Check>
+          <InputBox>
+            <College
+              value={selectedCollege}
+              onChange={(e) => setSelectedCollege(e.target.value)}
+            >
+              <option value="" disabled selected>
+                단과대학을 선택하세요
+              </option>
+              <option value="college1">인문대학</option>
+              <option value="college2">사회과학대학</option>
+              <option value="college3">자연정보과학대학</option>
+              <option value="college4">약학대학</option>
+              <option value="college5">예술대학</option>
+              <option value="college6">디자인대학</option>
+              <option value="college7">공연예술대학</option>
+              <option value="college8">문화지식융합대학</option>
+              <option value="college9">미래인재융합대학</option>
+            </College>
+            <Input
+              type="text"
+              placeholder="학번"
+              id="number"
+              value={stuId}
+              onChange={(e) => setStuId(e.target.value)}
+            ></Input>
+          </InputBox>
+          <Explain>
+            참여율로 순위가 집계되며 축제기간동안 1회 참여 가능합니다.
+          </Explain>
+          <Participation onClick={onParticipationClick}>참여하기</Participation>
+        </Body>
+      </BodyWrapper>
+      <Footer>
+        <Left>
+          <img
+            src={`${process.env.PUBLIC_URL}/images/footer-left.png`}
+            width="55px"
+            alt="footer"
+          />
+        </Left>
+        <FooterContentWrapper>
+          <Base>
             <img
-              src={`${process.env.PUBLIC_URL}/images/footer-left.png`}
-              width="55px"
+              src={`${process.env.PUBLIC_URL}/images/footer-base.png`}
+              width="100%"
+              height="148px"
               alt="footer"
             />
-          </Left>
-          <FooterContentWrapper>
-            <Base>
+          </Base>
+          <FooterContent>
+            <ManagementWrapper>
+              <p className="bold">축제 총 기획</p>
+              <p>동덕여대 축제 준비 위원회</p>
+            </ManagementWrapper>
+            <Line>
               <img
-                src={`${process.env.PUBLIC_URL}/images/footer-base.png`}
-                width="100%"
-                height="148px"
+                src={`${process.env.PUBLIC_URL}/images/footer-line.png`}
+                width="253px"
                 alt="footer"
               />
-            </Base>
-            <FooterContent>
-              <ManagementWrapper>
-                <p className="bold">축제 총 기획</p>
-                <p>동덕여대 축제 준비 위원회</p>
-              </ManagementWrapper>
-              <Line>
-                <img
-                  src={`${process.env.PUBLIC_URL}/images/footer-line.png`}
-                  width="253px"
-                  alt="footer"
-                />
-              </Line>
-              <FestivalWrapper>
-                <p id="marginBottom">2023 동덕여자대학교 대동제</p>
-                <p className="bold">동덕 uniVERSE</p>
-              </FestivalWrapper>
-              <Line>
-                <img
-                  src={`${process.env.PUBLIC_URL}/images/footer-line.png`}
-                  width="253px"
-                  alt="footer"
-                />
-              </Line>
-              <DevelopmentWrapper>
-                <p className="bold">축제 웹사이트 제작</p>
-                <p>동덕여대 멋쟁이사자처럼</p>
-              </DevelopmentWrapper>
-            </FooterContent>
-          </FooterContentWrapper>
-          <Right>
-            <img
-              src={`${process.env.PUBLIC_URL}/images/footer-right.png`}
-              width="55px"
-              alt="footer"
-            />
-          </Right>
-        </Footer>
-      </Container>
-    </motion.div>
+            </Line>
+            <FestivalWrapper>
+              <p id="marginBottom">2023 동덕여자대학교 대동제</p>
+              <p className="bold">동덕 uniVERSE</p>
+            </FestivalWrapper>
+            <Line>
+              <img
+                src={`${process.env.PUBLIC_URL}/images/footer-line.png`}
+                width="253px"
+                alt="footer"
+              />
+            </Line>
+            <DevelopmentWrapper>
+              <p className="bold">축제 웹사이트 제작</p>
+              <p>동덕여대 멋쟁이사자처럼</p>
+            </DevelopmentWrapper>
+          </FooterContent>
+        </FooterContentWrapper>
+        <Right>
+          <img
+            src={`${process.env.PUBLIC_URL}/images/footer-right.png`}
+            width="55px"
+            alt="footer"
+          />
+        </Right>
+      </Footer>
+    </Container>
   );
 };
 export default Battle;

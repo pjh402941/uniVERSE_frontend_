@@ -261,7 +261,28 @@ const CompetDetail = () => {
   if (loading) {
     return <div>잠시만 기다려주세요^_^</div>;
   }
-
+  const container = {
+    hidden: { opacity: 1, scale: 0 },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: {
+        delayChildren: 0.3,
+        staggerChildren: 0.2,
+      },
+    },
+  };
+  const item = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+    },
+  };
+  const ulStyle = {
+    padding: "0",
+    listStyle: "none",
+  };
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -293,119 +314,174 @@ const CompetDetail = () => {
               />
               <TitleBarText>현재 참여율 TOP3 단과대</TitleBarText>
             </TitleBar>
-            <div>
-              <TopBox>
-                <ImgBox>
-                  <img src={`${process.env.PUBLIC_URL}/images/1stdept.svg`} />
-                </ImgBox>
-                <TopText>
-                  <RankNum>{postList[0] && postList[0].rank}등</RankNum>
-                  <RankUniv>{postList[0] && postList[0].college}</RankUniv>
-                  <RankPercent>
-                    {postList[0] && postList[0].participationRate}%
-                  </RankPercent>
-                </TopText>
-              </TopBox>
-              <TopBox>
-                <div>
-                  <img src={`${process.env.PUBLIC_URL}/images/2nddept.svg`} />
-                </div>
-                <TopText>
-                  <RankNum>{postList[1] && postList[1].rank}등</RankNum>
-                  <RankUniv>{postList[1] && postList[1].college}</RankUniv>
-                  <RankPercent>
-                    {postList[1] && postList[1].participationRate}%
-                  </RankPercent>
-                </TopText>
-              </TopBox>
-              <TopBox>
-                <div>
-                  <img src={`${process.env.PUBLIC_URL}/images/3rddept.svg`} />
-                </div>
-                <TopText>
-                  <RankNum>{postList[2] && postList[2].rank}등</RankNum>
-                  <RankUniv>{postList[2] && postList[2].college}</RankUniv>
-                  <RankPercent>
-                    {postList[2] && postList[2].participationRate}%
-                  </RankPercent>
-                </TopText>
-              </TopBox>
-            </div>
-            <br />
-            <BoxList>
-              <RankBox>
-                <div>
-                  <img src={`${process.env.PUBLIC_URL}/images/littlebox.svg`} />
-                </div>
-                <RankText>
-                  <RankNum2>{postList[3] && postList[3].rank}등</RankNum2>
-                  <RankUniv2>{postList[3] && postList[3].college}</RankUniv2>
-                  <RankPercent2>
-                    {postList[3] && postList[3].participationRate}%
-                  </RankPercent2>
-                </RankText>
-              </RankBox>
-              <RankBox>
-                <div>
-                  <img src={`${process.env.PUBLIC_URL}/images/littlebox.svg`} />
-                </div>
-                <RankText>
-                  <RankNum2>{postList[4] && postList[4].rank}등</RankNum2>
-                  <RankUniv2>{postList[4] && postList[4].college}</RankUniv2>
-                  <RankPercent2>
-                    {postList[4] && postList[4].participationRate}%
-                  </RankPercent2>
-                </RankText>
-              </RankBox>
-              <RankBox>
-                <div>
-                  <img src={`${process.env.PUBLIC_URL}/images/littlebox.svg`} />
-                </div>
-                <RankText>
-                  <RankNum2>{postList[5] && postList[5].rank}등</RankNum2>
-                  <RankUniv2>{postList[5] && postList[5].college}</RankUniv2>
-                  <RankPercent2>
-                    {postList[5] && postList[5].participationRate}%
-                  </RankPercent2>
-                </RankText>
-              </RankBox>
-              <RankBox>
-                <div>
-                  <img src={`${process.env.PUBLIC_URL}/images/littlebox.svg`} />
-                </div>
-                <RankText>
-                  <RankNum2>{postList[6] && postList[6].rank}등</RankNum2>
-                  <RankUniv2>{postList[6] && postList[6].college}</RankUniv2>
-                  <RankPercent2>
-                    {postList[6] && postList[6].participationRate}%
-                  </RankPercent2>
-                </RankText>
-              </RankBox>
-              <RankBox>
-                <div>
-                  <img src={`${process.env.PUBLIC_URL}/images/littlebox.svg`} />
-                </div>
-                <RankText>
-                  <RankNum2>{postList[7] && postList[7].rank}등</RankNum2>
-                  <RankUniv2>{postList[7] && postList[7].college}</RankUniv2>
-                  <RankPercent2>
-                    {postList[7] && postList[7].participationRate}%
-                  </RankPercent2>
-                </RankText>
-              </RankBox>
-              <RankBox>
-                <div>
-                  <img src={`${process.env.PUBLIC_URL}/images/littlebox.svg`} />
-                </div>
-                <RankText>
-                  <RankNum2>{postList[8] && postList[8].rank}등</RankNum2>
-                  <RankUniv2>{postList[8] && postList[8].college}</RankUniv2>
-                  <RankPercent2>
-                    {postList[8] && postList[8].participationRate}%
-                  </RankPercent2>
-                </RankText>
-              </RankBox>
-            </BoxList>
+            <motion.ul
+              variants={container}
+              initial="hidden"
+              animate="visible"
+              style={ulStyle}
+            >
+              <div>
+                <motion.li variants={item}>
+                  <TopBox>
+                    <ImgBox>
+                      <img
+                        src={`${process.env.PUBLIC_URL}/images/1stdept.svg`}
+                      />
+                    </ImgBox>
+                    <TopText>
+                      <RankNum>{postList[0] && postList[0].rank}등</RankNum>
+                      <RankUniv>{postList[0] && postList[0].college}</RankUniv>
+                      <RankPercent>
+                        {postList[0] && postList[0].participationRate}%
+                      </RankPercent>
+                    </TopText>
+                  </TopBox>
+                </motion.li>
+                <motion.li variants={item}>
+                  <TopBox>
+                    <div>
+                      <img
+                        src={`${process.env.PUBLIC_URL}/images/2nddept.svg`}
+                      />
+                    </div>
+                    <TopText>
+                      <RankNum>{postList[1] && postList[1].rank}등</RankNum>
+                      <RankUniv>{postList[1] && postList[1].college}</RankUniv>
+                      <RankPercent>
+                        {postList[1] && postList[1].participationRate}%
+                      </RankPercent>
+                    </TopText>
+                  </TopBox>
+                </motion.li>
+                <motion.li variants={item}>
+                  <TopBox>
+                    <div>
+                      <img
+                        src={`${process.env.PUBLIC_URL}/images/3rddept.svg`}
+                      />
+                    </div>
+                    <TopText>
+                      <RankNum>{postList[2] && postList[2].rank}등</RankNum>
+                      <RankUniv>{postList[2] && postList[2].college}</RankUniv>
+                      <RankPercent>
+                        {postList[2] && postList[2].participationRate}%
+                      </RankPercent>
+                    </TopText>
+                  </TopBox>
+                </motion.li>
+              </div>
+              <br />
+              <BoxList>
+                <motion.li variants={item}>
+                  <RankBox>
+                    <div>
+                      <img
+                        src={`${process.env.PUBLIC_URL}/images/littlebox.svg`}
+                      />
+                    </div>
+                    <RankText>
+                      <RankNum2>{postList[3] && postList[3].rank}등</RankNum2>
+                      <RankUniv2>
+                        {postList[3] && postList[3].college}
+                      </RankUniv2>
+                      <RankPercent2>
+                        {postList[3] && postList[3].participationRate}%
+                      </RankPercent2>
+                    </RankText>
+                  </RankBox>
+                </motion.li>
+                <motion.li variants={item}>
+                  <RankBox>
+                    <div>
+                      <img
+                        src={`${process.env.PUBLIC_URL}/images/littlebox.svg`}
+                      />
+                    </div>
+                    <RankText>
+                      <RankNum2>{postList[4] && postList[4].rank}등</RankNum2>
+                      <RankUniv2>
+                        {postList[4] && postList[4].college}
+                      </RankUniv2>
+                      <RankPercent2>
+                        {postList[4] && postList[4].participationRate}%
+                      </RankPercent2>
+                    </RankText>
+                  </RankBox>
+                </motion.li>
+                <motion.li variants={item}>
+                  <RankBox>
+                    <div>
+                      <img
+                        src={`${process.env.PUBLIC_URL}/images/littlebox.svg`}
+                      />
+                    </div>
+                    <RankText>
+                      <RankNum2>{postList[5] && postList[5].rank}등</RankNum2>
+                      <RankUniv2>
+                        {postList[5] && postList[5].college}
+                      </RankUniv2>
+                      <RankPercent2>
+                        {postList[5] && postList[5].participationRate}%
+                      </RankPercent2>
+                    </RankText>
+                  </RankBox>
+                </motion.li>
+                <motion.li variants={item}>
+                  <RankBox>
+                    <div>
+                      <img
+                        src={`${process.env.PUBLIC_URL}/images/littlebox.svg`}
+                      />
+                    </div>
+                    <RankText>
+                      <RankNum2>{postList[6] && postList[6].rank}등</RankNum2>
+                      <RankUniv2>
+                        {postList[6] && postList[6].college}
+                      </RankUniv2>
+                      <RankPercent2>
+                        {postList[6] && postList[6].participationRate}%
+                      </RankPercent2>
+                    </RankText>
+                  </RankBox>
+                </motion.li>
+                <motion.li variants={item}>
+                  <RankBox>
+                    <div>
+                      <img
+                        src={`${process.env.PUBLIC_URL}/images/littlebox.svg`}
+                      />
+                    </div>
+                    <RankText>
+                      <RankNum2>{postList[7] && postList[7].rank}등</RankNum2>
+                      <RankUniv2>
+                        {postList[7] && postList[7].college}
+                      </RankUniv2>
+                      <RankPercent2>
+                        {postList[7] && postList[7].participationRate}%
+                      </RankPercent2>
+                    </RankText>
+                  </RankBox>
+                </motion.li>
+                <motion.li variants={item}>
+                  <RankBox>
+                    <div>
+                      <img
+                        src={`${process.env.PUBLIC_URL}/images/littlebox.svg`}
+                      />
+                    </div>
+                    <RankText>
+                      <RankNum2>{postList[8] && postList[8].rank}등</RankNum2>
+                      <RankUniv2>
+                        {postList[8] && postList[8].college}
+                      </RankUniv2>
+                      <RankPercent2>
+                        {postList[8] && postList[8].participationRate}%
+                      </RankPercent2>
+                    </RankText>
+                  </RankBox>
+                </motion.li>
+              </BoxList>
+            </motion.ul>
           </Body>
         </BodyWrapper>
 

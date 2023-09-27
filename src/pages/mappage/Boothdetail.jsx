@@ -225,9 +225,13 @@ const Boothdetail = () => {
   return (
     // 다른 페이지로 자연스럽게 넘어가기 위해 추가함
     <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
+      initial={{ scale: 0 }}
+      animate={{ scale: 1 }}
+      transition={{
+        type: "spring",
+        stiffness: 260,
+        damping: 20,
+      }}
     >
       <Container>
         <BodyWrapper>
