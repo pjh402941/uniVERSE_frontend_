@@ -175,9 +175,9 @@ const Mappage1 = () => {
             </Topbar>
             <Map>
               <img
-                src={`${process.env.PUBLIC_URL}/images/Boothmapp.png`}
-                width="337px"
-                height="383px"
+                src={`${process.env.PUBLIC_URL}/images/Boothmap.png`}
+                width="350px"
+                height="600px"
                 alt="map"
               />
             </Map>
