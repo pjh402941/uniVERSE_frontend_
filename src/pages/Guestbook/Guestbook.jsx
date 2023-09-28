@@ -92,7 +92,7 @@ const CommentBoxLine = styled.div`
     font-style: normal;
     font-weight: 400;
     line-height: normal;
-    margin-top: 15px;
+    margin-top: 10px;
     margin-left: -155px;
   }
 
@@ -242,9 +242,25 @@ const Guestbook = () => {
       }
     }
   };
+  const [loading, setLoading] = useState(false);
+  const loadingimg = {
+    margin: "0 auto",
+    width: "10%",
+    height: "10%",
+  };
+  const loadingStyle = {
+    margin: "0 auto",
+    display: "flex",
+    justifyContent: "center",
+    alignContent: "center",
+    alignItems: "center",
+    width: "100%",
+    height: "100vh",
+  };
 
   useEffect(() => {
     const loadComment = async () => {
+      setLoading(true);
       try {
         const response = await axios.get(`http://127.0.0.1:8000/guestbook/`);
         if (response.status === 200) {
@@ -259,6 +275,7 @@ const Guestbook = () => {
       } catch (error) {
         console.error("댓글 목록을 불러오는 중 오류가 발생했습니다.", error);
       }
+      setLoading(false);
     };
 
     loadComment();
@@ -277,33 +294,47 @@ const Guestbook = () => {
           />
         </Backbtn>
         <Title>방명록</Title>
-        <CommentWrapper>
-          <img
-            src={`${process.env.PUBLIC_URL}/images/cmtwrapper.png`}
-            alt="cmtwrapper"
-            width="75%"
-            height="540px"
-            style={{
-              minWidth: "360px",
-              maxWidth: "425px",
-              maxHeight: "900px",
-            }}
-          />
-          <CommentBoxLine ref={commentRefs}>
-            {commentsWithSomBox.map((item, index) => (
-              <div key={index}>
-                <StyledImage
-                  src={`${process.env.PUBLIC_URL}/images/somsom.png`}
-                  alt={`comment-image-${index}`}
-                />
-                <StyledBox alt={`comment-box-${index}`}>
-                  <div className="comment-som">SomSom</div>
-                  <div className="comment-text">{item.text}</div>
-                </StyledBox>
-              </div>
-            ))}
-          </CommentBoxLine>
-        </CommentWrapper>
+        {loading ? (
+          <div style={loadingStyle}>
+            <img
+              src="/images/loading.gif"
+              alt="로딩 중"
+              width="50px"
+              height="50px"
+              style={loadingimg}
+            />
+          </div>
+        ) : (
+          <>
+            <CommentWrapper>
+              <img
+                src={`${process.env.PUBLIC_URL}/images/cmtwrapper.png`}
+                alt="cmtwrapper"
+                width="75%"
+                height="540px"
+                style={{
+                  minWidth: "360px",
+                  maxWidth: "425px",
+                  maxHeight: "900px",
+                }}
+              />
+              <CommentBoxLine ref={commentRefs}>
+                {commentsWithSomBox.map((item, index) => (
+                  <div key={index}>
+                    <StyledImage
+                      src={`${process.env.PUBLIC_URL}/images/somsom.png`}
+                      alt={`comment-image-${index}`}
+                    />
+                    <StyledBox alt={`comment-box-${index}`}>
+                      <div className="comment-som">SomSom</div>
+                      <div className="comment-text">{item.text}</div>
+                    </StyledBox>
+                  </div>
+                ))}
+              </CommentBoxLine>
+            </CommentWrapper>
+          </>
+        )}
         <CommentBox>
           <img
             src={`${process.env.PUBLIC_URL}/images/cmtbox.png`}
