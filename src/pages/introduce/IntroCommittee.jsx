@@ -115,7 +115,7 @@ const InstagramBox = styled.div`
 const TopBox = styled.div`
   position: absolute;
   text-align: center;
-  top: 16.4%;
+  top: 25%;
   left: 3%;
   width: 94%;
   height: 21.6%;
@@ -303,7 +303,7 @@ const IntroCommittee = () => {
               <img
                 src={`${process.env.PUBLIC_URL}/images/CommitLogo.png`}
                 width="73%"
-                style={{ marginTop: "22%" }}
+                style={{ marginTop: "0%" }}
               />
             </TopBox>
 

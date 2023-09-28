@@ -178,7 +178,7 @@ const Firstpage = () => {
           >
             <div className="timetable_planet">
               <img
-                src={`${process.env.PUBLIC_URL}/images/timetable_planet.svg`}
+                src={`${process.env.PUBLIC_URL}/images/timetable_planet.png`}
                 alt="행성"
                 style={{
                   position: "relative",
@@ -202,12 +202,13 @@ const Firstpage = () => {
                   top: "-185px",
                   cursor: "pointer",
                 }}
+                onClick={onClickTimetable}
                 data-aos="fade-up"
               />
             </div>
             <div className="timetable_som">
               <img
-                src={`${process.env.PUBLIC_URL}/images/timetable_som.svg`}
+                src={`${process.env.PUBLIC_URL}/images/timetable_som.png`}
                 alt="타임테이블 솜솜이"
                 style={{
                   position: "relative",
@@ -221,7 +222,7 @@ const Firstpage = () => {
             </div>
             <div className="timetable_spaceship">
               <img
-                src={`${process.env.PUBLIC_URL}/images/timetable_spaceship.svg`}
+                src={`${process.env.PUBLIC_URL}/images/timetable_spaceship.png`}
                 alt="타임테이블 우주선"
                 style={{
                   position: "relative",
@@ -240,7 +241,7 @@ const Firstpage = () => {
           <div className="map" style={{ height: "250px", marginTop: "40px" }}>
             <div className="map_planet">
               <img
-                src={`${process.env.PUBLIC_URL}/images/map_planet.svg`}
+                src={`${process.env.PUBLIC_URL}/images/map_planet.png`}
                 alt="행성"
                 style={{
                   position: "relative",
@@ -263,19 +264,20 @@ const Firstpage = () => {
                   top: "-210px",
                   cursor: "pointer",
                 }}
+                onClick={onClickMap}
                 data-aos="fade-up"
               />
             </div>
 
             <div className="map_som" style={{ marginTop: "-40px" }}>
               <img
-                src={`${process.env.PUBLIC_URL}/images/map_som.svg`}
+                src={`${process.env.PUBLIC_URL}/images/map_som.png`}
                 alt="솜솜이"
                 style={{
                   position: "relative",
-                  width: "100px",
+                  width: "65px",
                   right: "-100px",
-                  top: "-320px",
+                  top: "-335px",
                   cursor: "pointer",
                 }}
                 data-aos="fade-right"
@@ -288,12 +290,12 @@ const Firstpage = () => {
           <div className="talk" style={{ height: "250px", marginTop: "-30px" }}>
             <div className="talk_planet">
               <img
-                src={`${process.env.PUBLIC_URL}/images/talk_planet2.svg`}
+                src={`${process.env.PUBLIC_URL}/images/talk_planet2.png`}
                 alt="행성"
                 style={{
                   position: "relative",
                   left: "-100px",
-                  top: "50px",
+                  top: "-20px",
                   cursor: "pointer",
                 }}
                 onClick={onClickTalk}
@@ -311,19 +313,20 @@ const Firstpage = () => {
                   top: "-340px",
                   cursor: "pointer",
                 }}
+                onClick={onClickTalk}
                 data-aos="fade-up"
               />
             </div>
 
             <div className="talk_som">
               <img
-                src={`${process.env.PUBLIC_URL}/images/talk_som.svg`}
+                src={`${process.env.PUBLIC_URL}/images/talk_som.png`}
                 alt="솜솜이"
                 style={{
                   position: "relative",
-                  width: "140px",
+                  width: "106px",
                   right: "-90px",
-                  top: "-600px",
+                  top: "-529px",
                   cursor: "pointer",
                 }}
                 data-aos="fade-left"
@@ -339,7 +342,7 @@ const Firstpage = () => {
           >
             <div className="competition_planet">
               <img
-                src={`${process.env.PUBLIC_URL}/images/competition_planet.svg`}
+                src={`${process.env.PUBLIC_URL}/images/competition_planet.png`}
                 alt="행성"
                 style={{
                   position: "relative",
@@ -362,17 +365,18 @@ const Firstpage = () => {
                   top: "-170px",
                   cursor: "pointer",
                 }}
+                onClick={onClickCompetition}
                 data-aos="fade-up"
               />
             </div>
 
             <div className="competition_som" style={{ marginTop: "-100px" }}>
               <img
-                src={`${process.env.PUBLIC_URL}/images/competiton_som.svg`}
+                src={`${process.env.PUBLIC_URL}/images/competiton_som.png`}
                 alt="솜솜이"
                 style={{
                   position: "relative",
-                  width: "97px",
+                  width: "65px",
                   right: "50px",
                   top: "-210px",
                   cursor: "pointer",
@@ -385,7 +389,7 @@ const Firstpage = () => {
               style={{ marginTop: "-100px" }}
             >
               <img
-                src={`${process.env.PUBLIC_URL}/images/competiton_spaceship.svg`}
+                src={`${process.env.PUBLIC_URL}/images/competiton_spaceship.png`}
                 alt="우주선"
                 style={{
                   position: "relative",
@@ -407,7 +411,7 @@ const Firstpage = () => {
           >
             <div className="introduce_planet">
               <img
-                src={`${process.env.PUBLIC_URL}/images/introduce_planet.svg`}
+                src={`${process.env.PUBLIC_URL}/images/introduce_planet.png`}
                 alt="행성"
                 style={{
                   position: "relative",
@@ -430,12 +434,13 @@ const Firstpage = () => {
                   top: "-345px",
                   cursor: "pointer",
                 }}
+                onClick={onClickIntroduce}
                 data-aos="fade-top"
               />
             </div>
             <div className="introduce_som" style={{ marginTop: "-200px" }}>
               <img
-                src={`${process.env.PUBLIC_URL}/images/introduce_som.svg`}
+                src={`${process.env.PUBLIC_URL}/images/introduce_som.png`}
                 alt="솜솜이"
                 style={{
                   position: "relative",
@@ -452,7 +457,7 @@ const Firstpage = () => {
               style={{ marginTop: "-200px" }}
             >
               <img
-                src={`${process.env.PUBLIC_URL}/images/introduce_spaceship.svg`}
+                src={`${process.env.PUBLIC_URL}/images/introduce_spaceship.png`}
                 alt="우주선"
                 style={{
                   position: "relative",
