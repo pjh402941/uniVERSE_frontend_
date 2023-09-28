@@ -3,7 +3,6 @@ import styled, { createGlobalStyle } from "styled-components";
 import { useNavigate } from "react-router-dom";
 import "./CustomScrollbar.css";
 import axios from "axios";
-import { motion } from "framer-motion";
 
 const GlobalStyle = createGlobalStyle`
   @font-face {
@@ -38,29 +37,16 @@ const Container = styled.div`
   }
 `;
 
-const Topbar = styled.div`
-  display: flex;
-  justify-content: space-between;
-  height: 70px;
-  margin-bottom: 5px;
-  box-sizing: border-box;
-  align-items: center;
-  padding-left: 8px;
-`;
-const Back = styled.div`
-  cursor: pointer;
-  position: absolute;
-  left: 27px;
-`;
-const Toptitle = styled.div`
-  color: #fff;
-  cursor: pointer;
-  margin: auto;
-  font-size: 20px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: normal;
-  padding-bottom: 5px;
+const Backbtn = styled.div`
+  position: relative;
+
+  margin-top: 33px;
+  margin-right: 315px;
+
+  z-index: 5;
+  :hover {
+    cursor: pointer;
+  }
 `;
 
 const Title = styled.div`
@@ -106,7 +92,7 @@ const CommentBoxLine = styled.div`
     font-style: normal;
     font-weight: 400;
     line-height: normal;
-    margin-top: 10px;
+    margin-top: 15px;
     margin-left: -155px;
   }
 
@@ -123,6 +109,7 @@ const CommentBoxLine = styled.div`
     white-space: normal;
     word-break: break-word;
     text-align: left;
+    z-index: 5;
   }
 `;
 
@@ -214,24 +201,8 @@ const Guestbook = () => {
     navigate("/");
   };
 
-  const loadingimg = {
-    margin: "0 auto",
-    width: "10%",
-    height: "10%",
-  };
-  const loadingStyle = {
-    margin: "0 auto",
-    display: "flex",
-    justifyContent: "center",
-    alignContent: "center",
-    alignItems: "center",
-    width: "100%",
-    height: "100vh",
-  };
-
   const [comment, setComment] = useState("");
   const [commentsWithSomBox, setCommentsWithSomBox] = useState([]);
-  const [loading, setLoading] = useState(false);
 
   const commentRefs = useRef([]); // 새 댓글에 포커스 맞추기
 
@@ -249,55 +220,63 @@ const Guestbook = () => {
 
   const addComment = async () => {
     if (comment.trim() !== "") {
-      const fetchData = async () => {
-        try {
-          const response = await axios.post(
-            "http://127.0.0.1:8000/guestbook/",
-            {
-              content: comment,
-            }
-          );
+      try {
+        const response = await axios.post(`http://127.0.0.1:8000/guestbook/`, {
+          content: comment,
+        });
 
-          if (response.status === 200) {
-            // 성공적으로 댓글이 생성된 경우
-            console.log("댓글이 성공적으로 생성되었습니다.");
-            const newComment = {
-              text: comment,
-              image: "./images/somsom.png",
-            };
-            setCommentsWithSomBox([...commentsWithSomBox, newComment]);
-            setComment(""); // 입력 필드 비우기
-          } else {
-            console.error("댓글 생성에 실패했습니다.");
-          }
-        } catch (error) {
-          console.error("댓글 생성 중 오류가 발생했습니다.", error);
+        if (response.status === 200) {
+          // 성공적으로 댓글이 생성된 경우
+          console.log("댓글이 성공적으로 생성되었습니다.");
+          const newComment = {
+            text: comment,
+            image: "${process.env.PUBLIC_URL}/images/somsom.png",
+          };
+          setCommentsWithSomBox([...commentsWithSomBox, newComment]);
+          setComment("");
+        } else {
+          console.error("댓글 생성에 실패했습니다.");
         }
-        setLoading(false);
-      };
-      fetchData();
+      } catch (error) {
+        console.error("댓글 생성 중 오류가 발생했습니다.", error);
+      }
     }
   };
-  const handleOnKeyPress = (e) => {
-    if (e.key === "Enter") {
-      setComment(e.target.value); // Enter 입력이 되면 클릭 이벤트 실행
-    }
-  };
+
+  useEffect(() => {
+    const loadComment = async () => {
+      try {
+        const response = await axios.get(`http://127.0.0.1:8000/guestbook/`);
+        if (response.status === 200) {
+          const loadedComments = response.data.map((commentData) => ({
+            text: commentData.content,
+            image: `${process.env.PUBLIC_URL}/images/somsom.png`,
+          }));
+          setCommentsWithSomBox(loadedComments);
+        } else {
+          console.error("댓글 목록을 불러오는데 실패했습니다.");
+        }
+      } catch (error) {
+        console.error("댓글 목록을 불러오는 중 오류가 발생했습니다.", error);
+      }
+    };
+
+    loadComment();
+  }, []);
+
   return (
     <>
       <GlobalStyle />
       <Container>
-        <Topbar>
-          <Back>
-            <img
-              src={`${process.env.PUBLIC_URL}/images/backbtn.png`}
-              width="24px"
-              height="24px"
-              onClick={() => GoBack()}
-            />
-          </Back>
-          <Toptitle>방명록</Toptitle>
-        </Topbar>
+        <Backbtn>
+          <img
+            src={`${process.env.PUBLIC_URL}/images/backbtn.png`}
+            alt="backbtn"
+            width="26px"
+            onClick={GoBack}
+          />
+        </Backbtn>
+        <Title>방명록</Title>
         <CommentWrapper>
           <img
             src={`${process.env.PUBLIC_URL}/images/cmtwrapper.png`}
@@ -310,45 +289,20 @@ const Guestbook = () => {
               maxHeight: "900px",
             }}
           />
-          {loading ? (
-            <div style={loadingStyle}>
-              <img
-                src="/images/loading.gif"
-                alt="로딩 중"
-                width="50px"
-                height="50px"
-                style={loadingimg}
-              />
-            </div>
-          ) : (
-            <>
-              <CommentBoxLine ref={commentRefs}>
-                {commentsWithSomBox.map((item, index) => (
-                  <motion.div
-                    key={index}
-                    initial={{ scale: 0 }}
-                    animate={{ scale: 1 }}
-                    transition={{
-                      type: "spring",
-                      stiffness: 260,
-                      damping: 20,
-                    }}
-                  >
-                    <div>
-                      <StyledImage
-                        src={item.image}
-                        alt={`comment-image-${index}`}
-                      />
-                      <StyledBox alt={`comment-box-${index}`}>
-                        <div className="comment-som">SomSom</div>
-                        <div className="comment-text">{item.text}</div>
-                      </StyledBox>
-                    </div>
-                  </motion.div>
-                ))}
-              </CommentBoxLine>
-            </>
-          )}
+          <CommentBoxLine ref={commentRefs}>
+            {commentsWithSomBox.map((item, index) => (
+              <div key={index}>
+                <StyledImage
+                  src={`${process.env.PUBLIC_URL}/images/somsom.png`}
+                  alt={`comment-image-${index}`}
+                />
+                <StyledBox alt={`comment-box-${index}`}>
+                  <div className="comment-som">SomSom</div>
+                  <div className="comment-text">{item.text}</div>
+                </StyledBox>
+              </div>
+            ))}
+          </CommentBoxLine>
         </CommentWrapper>
         <CommentBox>
           <img
@@ -362,7 +316,12 @@ const Guestbook = () => {
             placeholder={"댓글을 입력하세요."}
             value={comment}
             onChange={(e) => setComment(e.target.value)}
-            onKeyPress={handleOnKeyPress}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                e.preventDefault();
+                addComment();
+              }
+            }}
           />
         </CommentBox>
         <Send onClick={addComment}>
