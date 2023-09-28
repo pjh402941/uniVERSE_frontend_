@@ -109,6 +109,7 @@ const CommentBoxLine = styled.div`
     white-space: normal;
     word-break: break-word;
     text-align: left;
+    z-index: 5;
   }
 `;
 
@@ -220,7 +221,7 @@ const Guestbook = () => {
   const addComment = async () => {
     if (comment.trim() !== "") {
       try {
-        const response = await axios.post("http://127.0.0.1:8000/guestbook/", {
+        const response = await axios.post(`http://127.0.0.1:8000/guestbook/`, {
           content: comment,
         });
 
@@ -229,10 +230,10 @@ const Guestbook = () => {
           console.log("댓글이 성공적으로 생성되었습니다.");
           const newComment = {
             text: comment,
-            image: "./images/somsom.png",
+            image: "${process.env.PUBLIC_URL}/images/somsom.png",
           };
           setCommentsWithSomBox([...commentsWithSomBox, newComment]);
-          setComment(""); // 입력 필드 비우기
+          setComment("");
         } else {
           console.error("댓글 생성에 실패했습니다.");
         }
@@ -241,6 +242,27 @@ const Guestbook = () => {
       }
     }
   };
+
+  useEffect(() => {
+    const loadComment = async () => {
+      try {
+        const response = await axios.get(`http://127.0.0.1:8000/guestbook/`);
+        if (response.status === 200) {
+          const loadedComments = response.data.map((commentData) => ({
+            text: commentData.content,
+            image: `${process.env.PUBLIC_URL}/images/somsom.png`,
+          }));
+          setCommentsWithSomBox(loadedComments);
+        } else {
+          console.error("댓글 목록을 불러오는데 실패했습니다.");
+        }
+      } catch (error) {
+        console.error("댓글 목록을 불러오는 중 오류가 발생했습니다.", error);
+      }
+    };
+
+    loadComment();
+  }, []);
 
   return (
     <>
@@ -270,7 +292,10 @@ const Guestbook = () => {
           <CommentBoxLine ref={commentRefs}>
             {commentsWithSomBox.map((item, index) => (
               <div key={index}>
-                <StyledImage src={item.image} alt={`comment-image-${index}`} />
+                <StyledImage
+                  src={`${process.env.PUBLIC_URL}/images/somsom.png`}
+                  alt={`comment-image-${index}`}
+                />
                 <StyledBox alt={`comment-box-${index}`}>
                   <div className="comment-som">SomSom</div>
                   <div className="comment-text">{item.text}</div>
