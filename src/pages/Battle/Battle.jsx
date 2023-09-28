@@ -104,23 +104,29 @@ const Right = styled.div`
 const TopBar = styled.div`
   display: flex;
   justify-content: space-between;
-  height: 60px;
-  padding: 10px;
+  height: 70px;
+  padding-left: 20px;
+  box-sizing: border-box;
+  margin-bottom: 5px;
   align-items: center;
 `;
 
 const Back = styled.div`
   width: 24px;
   cursor: pointer;
+  position: absolute;
+  left: 27px;
 `;
 
 const Title = styled.div`
   color: #fff;
   font-family: SUIT;
-  font-size: 24px;
+  font-size: 20px;
   font-style: normal;
   font-weight: 700;
   line-height: normal;
+  padding-bottom: 5px;
+  margin: auto;
 `;
 
 const None = styled.div`
@@ -233,19 +239,44 @@ const TopText = styled.div`
   left: -3px;
 `;
 
-const RankNum = styled.div`
+const RankNum1 = styled.div`
   position: absolute;
   color: #fff;
-  margin-left: 42px;
   font-family: SUIT;
   font-size: 24px;
   font-style: normal;
   font-weight: 700;
   line-height: normal;
+  top: 0;
+  left: 46px;
 `;
+const RankNum2 = styled.div`
+  position: absolute;
+  color: #fff;
+  font-family: SUIT;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  top: 0;
+  left: 45px;
+`;
+const RankNum3 = styled.div`
+  position: absolute;
+  color: #fff;
+  font-family: SUIT;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  top: 0;
+  left: 43px;
+`;
+
 const RankUniv = styled.div`
   position: absolute;
-  margin-left: 132px;
+  left: 143px;
+  top: 5px;
   color: #fff;
   font-family: SUIT;
   font-size: 18px;
@@ -256,7 +287,7 @@ const RankUniv = styled.div`
 const RankPercent = styled.div`
   position: absolute;
   margin-left: 290px;
-  margin-top: -2px;
+  top: 4px;
   color: #fff;
   font-family: SUIT;
   font-size: 20px;
@@ -269,6 +300,42 @@ const Battle = () => {
   const navigate = useNavigate();
   const [selectedCollege, setSelectedCollege] = useState(""); // 선택한 단과대학 상태
   const [stuId, setStuId] = useState(""); // 학번 상태
+  const container = {
+    hidden: { opacity: 1, scale: 0 },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: {
+        delayChildren: 0.3,
+        staggerChildren: 0.2,
+      },
+    },
+  };
+  const item = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+    },
+  };
+  const ulStyle = {
+    padding: "0",
+    listStyle: "none",
+  };
+  const loadingimg = {
+    margin: "0 auto",
+    width: "10%",
+    height: "10%",
+  };
+  const loadingStyle = {
+    margin: "0 auto",
+    display: "flex",
+    justifyContent: "center",
+    alignContent: "center",
+    alignItems: "center",
+    width: "100%",
+    height: "100vh",
+  };
 
   const onClickBtn = () => {
     navigate(-1); // 바로 이전 페이지로 이동, '/main' 등 직접 지정도 당연히 가능
@@ -297,10 +364,6 @@ const Battle = () => {
     fetchData();
   }, []);
 
-  if (loading) {
-    return <div>잠시만 기다려주세요^_^</div>;
-  }
-
   const onParticipationClick = async () => {
     try {
       // 선택한 단과대학과 학번을 서버로 보내기
@@ -324,28 +387,7 @@ const Battle = () => {
       alert("올바른 학번을 입력하세요");
     }
   };
-  const container = {
-    hidden: { opacity: 1, scale: 0 },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      transition: {
-        delayChildren: 0.3,
-        staggerChildren: 0.2,
-      },
-    },
-  };
-  const item = {
-    hidden: { y: 20, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-    },
-  };
-  const ulStyle = {
-    padding: "0",
-    listStyle: "none",
-  };
+
   return (
     <Container>
       <TopBar>
@@ -360,97 +402,119 @@ const Battle = () => {
         <None></None>
       </TopBar>
       <BodyWrapper>
-        <Body>
-          <TopBox>
+        {loading ? (
+          <div style={loadingStyle}>
             <img
-              src={`${process.env.PUBLIC_URL}/images/Union.png`}
-              alt="back"
-              width="197.451px"
-              height="39.774px"
+              src="/images/loading.gif"
+              alt="로딩 중"
+              width="50px"
+              height="50px"
+              style={loadingimg}
             />
-            <TopTitle>현재 참여율 TOP 3 단과대</TopTitle>
-          </TopBox>
-          <motion.ul
-            variants={container}
-            initial="hidden"
-            animate="visible"
-            style={ulStyle}
-          >
-            <motion.li variants={item}>
-              <TopBox2>
-                <ImgBox>
-                  <img src={`${process.env.PUBLIC_URL}/images/1stdept.svg`} />
-                </ImgBox>
-                <TopText>
-                  <RankNum>{postList[0] && postList[0].rank}등</RankNum>
-                  <RankUniv>{postList[0] && postList[0].college}</RankUniv>
-                  <RankPercent>
-                    {postList[0] && postList[0].participationRate}%
-                  </RankPercent>
-                </TopText>
-              </TopBox2>
-            </motion.li>
-            <motion.li variants={item}>
-              <TopBox2>
-                <div>
-                  <img src={`${process.env.PUBLIC_URL}/images/2nddept.svg`} />
-                </div>
-                <TopText>
-                  <RankNum>{postList[1] && postList[1].rank}등</RankNum>
-                  <RankUniv>{postList[1] && postList[1].college}</RankUniv>
-                  <RankPercent>
-                    {postList[1] && postList[1].participationRate}%
-                  </RankPercent>
-                </TopText>
-              </TopBox2>
-            </motion.li>
-            <motion.li variants={item}>
-              <TopBox2>
-                <div>
-                  <img src={`${process.env.PUBLIC_URL}/images/3rddept.svg`} />
-                </div>
-                <TopText>
-                  <RankNum>{postList[2] && postList[2].rank}등</RankNum>
-                  <RankUniv>{postList[2] && postList[2].college}</RankUniv>
-                  <RankPercent>
-                    {postList[2] && postList[2].participationRate}%
-                  </RankPercent>
-                </TopText>
-              </TopBox2>
-            </motion.li>
-          </motion.ul>
-          <Check onClick={checkRanking}>순위 확인하기</Check>
-          <InputBox>
-            <College
-              value={selectedCollege}
-              onChange={(e) => setSelectedCollege(e.target.value)}
-            >
-              <option value="" disabled selected>
-                단과대학을 선택하세요
-              </option>
-              <option value="college1">인문대학</option>
-              <option value="college2">사회과학대학</option>
-              <option value="college3">자연정보과학대학</option>
-              <option value="college4">약학대학</option>
-              <option value="college5">예술대학</option>
-              <option value="college6">디자인대학</option>
-              <option value="college7">공연예술대학</option>
-              <option value="college8">문화지식융합대학</option>
-              <option value="college9">미래인재융합대학</option>
-            </College>
-            <Input
-              type="text"
-              placeholder="학번"
-              id="number"
-              value={stuId}
-              onChange={(e) => setStuId(e.target.value)}
-            ></Input>
-          </InputBox>
-          <Explain>
-            참여율로 순위가 집계되며 축제기간동안 1회 참여 가능합니다.
-          </Explain>
-          <Participation onClick={onParticipationClick}>참여하기</Participation>
-        </Body>
+          </div>
+        ) : (
+          <>
+            <Body>
+              <TopBox>
+                <img
+                  src={`${process.env.PUBLIC_URL}/images/Union.png`}
+                  alt="back"
+                  width="197.451px"
+                  height="39.774px"
+                />
+                <TopTitle>현재 참여율 TOP 3 단과대</TopTitle>
+              </TopBox>
+              <motion.ul
+                variants={container}
+                initial="hidden"
+                animate="visible"
+                style={ulStyle}
+              >
+                <motion.li variants={item}>
+                  <TopBox2>
+                    <ImgBox>
+                      <img
+                        src={`${process.env.PUBLIC_URL}/images/1stdept.svg`}
+                      />
+                    </ImgBox>
+                    <TopText>
+                      <RankNum1>{postList[0] && postList[0].rank}등</RankNum1>
+                      <RankUniv>{postList[0] && postList[0].college}</RankUniv>
+                      <RankPercent>
+                        {postList[0] && postList[0].participationRate}%
+                      </RankPercent>
+                    </TopText>
+                  </TopBox2>
+                </motion.li>
+                <motion.li variants={item}>
+                  <TopBox2>
+                    <div>
+                      <img
+                        src={`${process.env.PUBLIC_URL}/images/2nddept.svg`}
+                      />
+                    </div>
+                    <TopText>
+                      <RankNum2>{postList[1] && postList[1].rank}등</RankNum2>
+                      <RankUniv>{postList[1] && postList[1].college}</RankUniv>
+                      <RankPercent>
+                        {postList[1] && postList[1].participationRate}%
+                      </RankPercent>
+                    </TopText>
+                  </TopBox2>
+                </motion.li>
+                <motion.li variants={item}>
+                  <TopBox2>
+                    <div>
+                      <img
+                        src={`${process.env.PUBLIC_URL}/images/3rddept.svg`}
+                      />
+                    </div>
+                    <TopText>
+                      <RankNum3>{postList[2] && postList[2].rank}등</RankNum3>
+                      <RankUniv>{postList[2] && postList[2].college}</RankUniv>
+                      <RankPercent>
+                        {postList[2] && postList[2].participationRate}%
+                      </RankPercent>
+                    </TopText>
+                  </TopBox2>
+                </motion.li>
+              </motion.ul>
+              <Check onClick={checkRanking}>순위 확인하기</Check>
+              <InputBox>
+                <College
+                  value={selectedCollege}
+                  onChange={(e) => setSelectedCollege(e.target.value)}
+                >
+                  <option value="" disabled selected>
+                    단과대학을 선택하세요
+                  </option>
+                  <option value="college1">인문대학</option>
+                  <option value="college2">사회과학대학</option>
+                  <option value="college3">자연정보과학대학</option>
+                  <option value="college4">약학대학</option>
+                  <option value="college5">예술대학</option>
+                  <option value="college6">디자인대학</option>
+                  <option value="college7">공연예술대학</option>
+                  <option value="college8">문화지식융합대학</option>
+                  <option value="college9">미래인재융합대학</option>
+                </College>
+                <Input
+                  type="text"
+                  placeholder="학번"
+                  id="number"
+                  value={stuId}
+                  onChange={(e) => setStuId(e.target.value)}
+                ></Input>
+              </InputBox>
+              <Explain>
+                참여율로 순위가 집계되며 축제기간동안 1회 참여 가능합니다.
+              </Explain>
+              <Participation onClick={onParticipationClick}>
+                참여하기
+              </Participation>
+            </Body>
+          </>
+        )}
       </BodyWrapper>
       <Footer>
         <Left>

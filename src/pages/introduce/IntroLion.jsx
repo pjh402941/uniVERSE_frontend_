@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 
 const Container = styled.div`
   align-items: center;
@@ -27,35 +28,33 @@ const Container = styled.div`
   }
 `;
 // 상단
-const TopContainer = styled.div`
-  margin-top: 6px;
-  /*기본스타일*/
-  width: 100%;
-  height: 60px;
+const Topbar = styled.div`
+  display: flex;
+  justify-content: space-between;
+  height: 70px;
+  margin-bottom: 5px;
+  box-sizing: border-box;
+  align-items: center;
+  padding-left: 12px;
 `;
-const GoBack = styled.img`
-  position: relative;
-  width: 25px;
-  top: 10px;
-  left: -37%;
+const Back = styled.div`
+  cursor: pointer;
+  position: absolute;
+  left: 27px;
 `;
-const TopText = styled.span`
-design: flex
-  margin: 0px auto;
-  width: 60px;
-  height: 40px;
-  top: 2px;
+const Toptitle = styled.div`
   color: #fff;
-  font-family: SUIT;
-  font-size: 18px;
+  cursor: pointer;
+  margin: auto;
+  font-size: 20px;
   font-style: normal;
-  font-weight: 900;
+  font-weight: 600;
   line-height: normal;
+  padding-bottom: 5px;
 `;
 
 const BodyWrapper = styled.div`
   min-height: calc(100vh - 151px); //푸터 공간 확보
-  padding-top: 18px;
 `;
 
 const TopIndex = styled.div`
@@ -233,6 +232,9 @@ const Right = styled.div`
 
 const IntroLion = () => {
   const navigate = useNavigate();
+  const GoBack = () => {
+    navigate("/");
+  };
 
   const GoFestival = () => {
     // 버튼을 클릭할 때 페이지 이동을 수행합니다.
@@ -272,101 +274,114 @@ const IntroLion = () => {
 
   return (
     <Container>
-      <TopContainer>
-        <GoBack
-          src={`${process.env.PUBLIC_URL}/images/top-backBtn.png`}
-        ></GoBack>
-        <TopText>소개</TopText>
-      </TopContainer>
-
-      <BodyWrapper>
-        <div style={{ margin: "0px auto", position: "relative" }}>
-          <TopIndex>
-            <Index1 onClick={GoFestival}>축제</Index1>
-            <Index2 onClick={GoCommittee}>축.운.위</Index2>
-            <Index3>멋사 11기</Index3>
-          </TopIndex>
-
-          <NameCode
-            style={{
-              top: "4.7%", //absolute 쓸거면 top은 %로
-              position: "absolute",
-              left: "18%",
-              // transform: "translateX(-30%)",
-            }}
-          >
-            멋쟁이사자처럼 동덕여대 11기
-          </NameCode>
-
-          <InstagramBox>
-            <span style={instagramText}>instagram</span>
-            <a
-              style={linkStyle}
-              href="https://instagram.com/dongduk_likelion?igshid=MzRlODBiNWFlZA=="
-              target="_blank"
-            >
-              @dongduk_likelion
-            </a>
-          </InstagramBox>
-
-          <TopBox>
-            <LogoBox>
-              <img
-                src={`${process.env.PUBLIC_URL}/images/lionLogo.png`}
-                width="44%"
-                style={{ marginRight: "2%" }}
-              />
-              <img
-                src={`${process.env.PUBLIC_URL}/images/dongLogo.png`}
-                width="9%"
-              />
-            </LogoBox>
-            <img
-              src={`${process.env.PUBLIC_URL}/images/we.png`}
-              width="73%"
-              style={{ marginTop: "13%" }}
-            />
-            <AboutLion>
-              연합 동아리 <span style={TextStrongStyle}>멋쟁이 사자처럼</span>은
-              현재 국내에서
-              <br /> 가장 많은 학생들이 활동하고 있는
-              <br /> 프로그래밍 교육 동아리입니다.
-              <br /> 전국의 대학이 함께하는 연합 코딩 동아리로
-              <br /> 각종 스터디를 통해 여러 아이디어의 실현에 도전합니다.
-              <br /> <strong>“내 아이디어를 내 손으로 실현한다.”</strong>
-              라는 가치 아래
-              <br />
-              창업과 서비스 개발 등 아이디어를 내 손으로 실현할 수 있는
-              <br /> 다양한 교육과 기회를 제공합니다.
-            </AboutLion>
-          </TopBox>
-
-          <FrontBox>
-            <img
-              src={`${process.env.PUBLIC_URL}/images/Front.png`}
-              width="57%"
-            />
-          </FrontBox>
-          <BackBox>
-            <img
-              src={`${process.env.PUBLIC_URL}/images/Back.png`}
-              width="44%"
-            />
-          </BackBox>
-          <DesignBox>
-            <img
-              src={`${process.env.PUBLIC_URL}/images/Design.png`}
-              width="44%"
-            />
-          </DesignBox>
-
+      <Topbar>
+        <Back>
           <img
-            src={`${process.env.PUBLIC_URL}/images/FrameLion.png`}
-            style={{ maxWidth: "88%", height: "auto" }}
+            src={`${process.env.PUBLIC_URL}/images/backbtn.png`}
+            width="24px"
+            height="24px"
+            onClick={() => GoBack()}
           />
-        </div>
-      </BodyWrapper>
+        </Back>
+        <Toptitle>소개</Toptitle>
+      </Topbar>
+      <motion.div
+        initial={{ scale: 0.8 }}
+        animate={{ scale: 1 }}
+        transition={{
+          type: "spring",
+          stiffness: 260,
+          damping: 20,
+        }}
+      >
+        <BodyWrapper>
+          <div style={{ margin: "0px auto", position: "relative" }}>
+            <TopIndex>
+              <Index1 onClick={GoFestival}>축제</Index1>
+              <Index2 onClick={GoCommittee}>축.운.위</Index2>
+              <Index3>멋사 11기</Index3>
+            </TopIndex>
 
+            <NameCode
+              style={{
+                top: "4.7%", //absolute 쓸거면 top은 %로
+                position: "absolute",
+                left: "18%",
+                // transform: "translateX(-30%)",
+              }}
+            >
+              멋쟁이사자처럼 동덕여대 11기
+            </NameCode>
+
+            <InstagramBox>
+              <span style={instagramText}>instagram</span>
+              <a
+                style={linkStyle}
+                href="https://instagram.com/dongduk_likelion?igshid=MzRlODBiNWFlZA=="
+                target="_blank"
+              >
+                @dongduk_likelion
+              </a>
+            </InstagramBox>
+
+            <TopBox>
+              <LogoBox>
+                <img
+                  src={`${process.env.PUBLIC_URL}/images/lionLogo.png`}
+                  width="44%"
+                  style={{ marginRight: "2%" }}
+                />
+                <img
+                  src={`${process.env.PUBLIC_URL}/images/dongLogo.png`}
+                  width="9%"
+                />
+              </LogoBox>
+              <img
+                src={`${process.env.PUBLIC_URL}/images/we.png`}
+                width="73%"
+                style={{ marginTop: "13%" }}
+              />
+              <AboutLion>
+                연합 동아리 <span style={TextStrongStyle}>멋쟁이 사자처럼</span>
+                은 현재 국내에서
+                <br /> 가장 많은 학생들이 활동하고 있는
+                <br /> 프로그래밍 교육 동아리입니다.
+                <br /> 전국의 대학이 함께하는 연합 코딩 동아리로
+                <br /> 각종 스터디를 통해 여러 아이디어의 실현에 도전합니다.
+                <br /> <strong>“내 아이디어를 내 손으로 실현한다.”</strong>
+                라는 가치 아래
+                <br />
+                창업과 서비스 개발 등 아이디어를 내 손으로 실현할 수 있는
+                <br /> 다양한 교육과 기회를 제공합니다.
+              </AboutLion>
+            </TopBox>
+
+            <FrontBox>
+              <img
+                src={`${process.env.PUBLIC_URL}/images/Front.png`}
+                width="57%"
+              />
+            </FrontBox>
+            <BackBox>
+              <img
+                src={`${process.env.PUBLIC_URL}/images/Back.png`}
+                width="44%"
+              />
+            </BackBox>
+            <DesignBox>
+              <img
+                src={`${process.env.PUBLIC_URL}/images/Design.png`}
+                width="44%"
+              />
+            </DesignBox>
+
+            <img
+              src={`${process.env.PUBLIC_URL}/images/FrameLion.png`}
+              style={{ maxWidth: "88%", height: "auto" }}
+            />
+          </div>
+        </BodyWrapper>
+      </motion.div>
       <Footer>
         <Left>
           <img
