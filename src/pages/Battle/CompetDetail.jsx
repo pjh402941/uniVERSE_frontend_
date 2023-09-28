@@ -1,7 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-// import axios from "axios";
+import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 const Container = styled.div`
   display: flex;
@@ -96,19 +98,19 @@ const Right = styled.div`
 
 // 추가
 const PageTitle = styled.div`
-  position: relative;
-  margin: auto;
   color: #fff;
-  font-family: SUIT;
-  font-size: 24px;
+  cursor: pointer;
+  margin: auto;
+  font-size: 20px;
   font-style: normal;
-  font-weight: 700;
+  font-weight: 600;
   line-height: normal;
+  padding-bottom: 5px;
 `;
 const BackBtn = styled.div`
+  cursor: pointer;
   position: absolute;
-  left: 5%;
-  top: 30%;
+  left: 27px;
 `;
 const TitleBar = styled.div`
   position: relative;
@@ -116,6 +118,7 @@ const TitleBar = styled.div`
   flex-direction: row;
   gap: 17px;
   justify-content: center;
+  margin-top: 10px;
 `;
 const TitleBarText = styled.div`
   position: absolute;
@@ -128,29 +131,54 @@ const TitleBarText = styled.div`
   font-weight: 700;
   line-height: normal;
 `;
-const RankNum = styled.div`
+const RankNum11 = styled.div`
   position: absolute;
   color: #fff;
-  margin-left: 42px;
   font-family: SUIT;
   font-size: 24px;
   font-style: normal;
   font-weight: 700;
   line-height: normal;
+  top: 0;
+  left: 46px;
+`;
+const RankNum22 = styled.div`
+  position: absolute;
+  color: #fff;
+  font-family: SUIT;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  top: 0;
+  left: 45px;
+`;
+const RankNum33 = styled.div`
+  position: absolute;
+  color: #fff;
+  font-family: SUIT;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  top: 0;
+  left: 43px;
 `;
 const RankUniv = styled.div`
   position: absolute;
-  margin-left: 140px;
+  left: 143px;
+  top: 5px;
   color: #fff;
   font-family: SUIT;
-  font-size: 20px;
+  font-size: 18px;
   font-style: normal;
   font-weight: 500;
   line-height: normal;
 `;
 const RankPercent = styled.div`
   position: absolute;
-  margin-left: 280px;
+  margin-left: 290px;
+  top: 4px;
   color: #fff;
   font-family: SUIT;
   font-size: 20px;
@@ -170,10 +198,11 @@ const RankNum2 = styled.div`
 `;
 const RankUniv2 = styled.div`
   position: absolute;
-  margin-left: 110px;
+  margin-left: 100px;
+  margin-top: 2px;
   color: #fff;
   font-family: SUIT;
-  font-size: 20px;
+  font-size: 18px;
   font-style: normal;
   font-weight: 500;
   line-height: normal;
@@ -189,13 +218,19 @@ const RankPercent2 = styled.div`
   line-height: normal;
 `;
 const Box = styled.div`
-  position: relative;
-  width: 100%;
-  margin-top: 30px;
-  margin-bottom: 39px;
-  height: 50px;
   display: flex;
   justify-content: space-between;
+  height: 70px;
+  margin-bottom: 5px;
+  box-sizing: border-box;
+  align-items: center;
+  padding-left: 12px;  display: flex;
+  justify-content: space-between;
+  height: 70px;
+  margin-bottom: 5px;
+  box-sizing: border-box;
+  align-items: center;
+  padding-left: 12px;backbtn
 `;
 
 const TopBox = styled.div`
@@ -234,186 +269,357 @@ const CompetDetail = () => {
   const goBack = () => {
     navigate(-1); // 임시 설정
   };
+  const loadingimg = {
+    margin: "0 auto",
+    width: "10%",
+    height: "10%",
+  };
+  const loadingStyle = {
+    margin: "0 auto",
+    display: "flex",
+    justifyContent: "center",
+    alignContent: "center",
+    alignItems: "center",
+    width: "100%",
+    height: "100vh",
+  };
 
+  // 연동 코드 (여기서 부터 추가!!!)
+  const [postList, setPostList] = useState([]); // 배열에 받아서 저장
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setLoading(true);
+      try {
+        // API 호출
+        const response = await axios.get("http://127.0.0.1:8000/competition/");
+        setPostList(response.data.collegeRank); //collegeRank 배열 저장
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+      setLoading(false);
+    };
+    fetchData();
+  }, []);
+  const container = {
+    hidden: { opacity: 1, scale: 0 },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: {
+        delayChildren: 0.3,
+        staggerChildren: 0.2,
+      },
+    },
+  };
+  const item = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+    },
+  };
+  const ulStyle = {
+    padding: "0",
+    listStyle: "none",
+  };
   return (
-    <Container>
-      <BodyWrapper>
-        <Body>
-          <Box>
-            <BackBtn onClick={goBack}>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
+      <Container>
+        <BodyWrapper>
+          {loading ? (
+            <div style={loadingStyle}>
               <img
-                src={`${process.env.PUBLIC_URL}/images/backbtn.svg`}
-                width="25px"
-                alt="titlebar"
+                src="/images/loading.gif"
+                alt="로딩 중"
+                width="50px"
+                height="50px"
+                style={loadingimg}
               />
-            </BackBtn>
-            <PageTitle>단과 대항전</PageTitle>
-          </Box>
-          <TitleBar>
-            <img
-              src={`${process.env.PUBLIC_URL}/images/titlebar2.svg`}
-              style={{
-                width: "100%",
-                height: "auto",
-                maxHeight: "60px",
-              }}
-              alt="titlebar"
-            />
-            <TitleBarText>현재 참여율 TOP3 단과대</TitleBarText>
-          </TitleBar>
-          <div>
-            <TopBox>
-              <ImgBox>
-                <img src={`${process.env.PUBLIC_URL}/images/1stdept.svg`} />
-              </ImgBox>
-              <TopText>
-                <RankNum>1등</RankNum>
-                <RankUniv>단과대</RankUniv>
-                <RankPercent>00%</RankPercent>
-              </TopText>
-            </TopBox>
-            <TopBox>
-              <div>
-                <img src={`${process.env.PUBLIC_URL}/images/2nddept.svg`} />
-              </div>
-              <TopText>
-                <RankNum>2등</RankNum>
-                <RankUniv>단과대</RankUniv>
-                <RankPercent>00%</RankPercent>
-              </TopText>
-            </TopBox>
-            <TopBox>
-              <div>
-                <img src={`${process.env.PUBLIC_URL}/images/3rddept.svg`} />
-              </div>
-              <TopText>
-                <RankNum>3등</RankNum>
-                <RankUniv>단과대</RankUniv>
-                <RankPercent>00%</RankPercent>
-              </TopText>
-            </TopBox>
-          </div>
-          <br />
-          <BoxList>
-            <RankBox>
-              <div>
-                <img src={`${process.env.PUBLIC_URL}/images/littlebox.svg`} />
-              </div>
-              <RankText>
-                <RankNum2>4등</RankNum2>
-                <RankUniv2>단과대</RankUniv2>
-                <RankPercent2>00%</RankPercent2>
-              </RankText>
-            </RankBox>
-            <RankBox>
-              <div>
-                <img src={`${process.env.PUBLIC_URL}/images/littlebox.svg`} />
-              </div>
-              <RankText>
-                <RankNum2>5등</RankNum2>
-                <RankUniv2>단과대</RankUniv2>
-                <RankPercent2>00%</RankPercent2>
-              </RankText>
-            </RankBox>
-            <RankBox>
-              <div>
-                <img src={`${process.env.PUBLIC_URL}/images/littlebox.svg`} />
-              </div>
-              <RankText>
-                <RankNum2>6등</RankNum2>
-                <RankUniv2>단과대</RankUniv2>
-                <RankPercent2>00%</RankPercent2>
-              </RankText>
-            </RankBox>
-            <RankBox>
-              <div>
-                <img src={`${process.env.PUBLIC_URL}/images/littlebox.svg`} />
-              </div>
-              <RankText>
-                <RankNum2>7등</RankNum2>
-                <RankUniv2>단과대</RankUniv2>
-                <RankPercent2>00%</RankPercent2>
-              </RankText>
-            </RankBox>
-            <RankBox>
-              <div>
-                <img src={`${process.env.PUBLIC_URL}/images/littlebox.svg`} />
-              </div>
-              <RankText>
-                <RankNum2>8등</RankNum2>
-                <RankUniv2>단과대</RankUniv2>
-                <RankPercent2>00%</RankPercent2>
-              </RankText>
-            </RankBox>
-            <RankBox>
-              <div>
-                <img src={`${process.env.PUBLIC_URL}/images/littlebox.svg`} />
-              </div>
-              <RankText>
-                <RankNum2>9등</RankNum2>
-                <RankUniv2>단과대</RankUniv2>
-                <RankPercent2>00%</RankPercent2>
-              </RankText>
-            </RankBox>
-          </BoxList>
-        </Body>
-      </BodyWrapper>
+            </div>
+          ) : (
+            <>
+              <Body>
+                <Box>
+                  <BackBtn onClick={goBack}>
+                    <img
+                      src={`${process.env.PUBLIC_URL}/images/backbtn.svg`}
+                      width="25px"
+                      alt="titlebar"
+                    />
+                  </BackBtn>
+                  <PageTitle>단과 대항전</PageTitle>
+                </Box>
+                <TitleBar>
+                  <img
+                    src={`${process.env.PUBLIC_URL}/images/titlebar2.svg`}
+                    style={{
+                      width: "100%",
+                      height: "auto",
+                      maxHeight: "60px",
+                    }}
+                    alt="titlebar"
+                  />
+                  <TitleBarText>현재 참여율 TOP3 단과대</TitleBarText>
+                </TitleBar>
+                <motion.ul
+                  variants={container}
+                  initial="hidden"
+                  animate="visible"
+                  style={ulStyle}
+                >
+                  <div>
+                    <motion.li variants={item}>
+                      <TopBox>
+                        <ImgBox>
+                          <img
+                            src={`${process.env.PUBLIC_URL}/images/1stdept.svg`}
+                          />
+                        </ImgBox>
+                        <TopText>
+                          <RankNum11>
+                            {postList[0] && postList[0].rank}등
+                          </RankNum11>
+                          <RankUniv>
+                            {postList[0] && postList[0].college}
+                          </RankUniv>
+                          <RankPercent>
+                            {postList[0] && postList[0].participationRate}%
+                          </RankPercent>
+                        </TopText>
+                      </TopBox>
+                    </motion.li>
+                    <motion.li variants={item}>
+                      <TopBox>
+                        <div>
+                          <img
+                            src={`${process.env.PUBLIC_URL}/images/2nddept.svg`}
+                          />
+                        </div>
+                        <TopText>
+                          <RankNum22>
+                            {postList[1] && postList[1].rank}등
+                          </RankNum22>
+                          <RankUniv>
+                            {postList[1] && postList[1].college}
+                          </RankUniv>
+                          <RankPercent>
+                            {postList[1] && postList[1].participationRate}%
+                          </RankPercent>
+                        </TopText>
+                      </TopBox>
+                    </motion.li>
+                    <motion.li variants={item}>
+                      <TopBox>
+                        <div>
+                          <img
+                            src={`${process.env.PUBLIC_URL}/images/3rddept.svg`}
+                          />
+                        </div>
+                        <TopText>
+                          <RankNum33>
+                            {postList[2] && postList[2].rank}등
+                          </RankNum33>
+                          <RankUniv>
+                            {postList[2] && postList[2].college}
+                          </RankUniv>
+                          <RankPercent>
+                            {postList[2] && postList[2].participationRate}%
+                          </RankPercent>
+                        </TopText>
+                      </TopBox>
+                    </motion.li>
+                  </div>
+                  <br />
+                  <BoxList>
+                    <motion.li variants={item}>
+                      <RankBox>
+                        <div>
+                          <img
+                            src={`${process.env.PUBLIC_URL}/images/littlebox.svg`}
+                          />
+                        </div>
+                        <RankText>
+                          <RankNum2>
+                            {postList[3] && postList[3].rank}등
+                          </RankNum2>
+                          <RankUniv2>
+                            {postList[3] && postList[3].college}
+                          </RankUniv2>
+                          <RankPercent2>
+                            {postList[3] && postList[3].participationRate}%
+                          </RankPercent2>
+                        </RankText>
+                      </RankBox>
+                    </motion.li>
+                    <motion.li variants={item}>
+                      <RankBox>
+                        <div>
+                          <img
+                            src={`${process.env.PUBLIC_URL}/images/littlebox.svg`}
+                          />
+                        </div>
+                        <RankText>
+                          <RankNum2>
+                            {postList[4] && postList[4].rank}등
+                          </RankNum2>
+                          <RankUniv2>
+                            {postList[4] && postList[4].college}
+                          </RankUniv2>
+                          <RankPercent2>
+                            {postList[4] && postList[4].participationRate}%
+                          </RankPercent2>
+                        </RankText>
+                      </RankBox>
+                    </motion.li>
+                    <motion.li variants={item}>
+                      <RankBox>
+                        <div>
+                          <img
+                            src={`${process.env.PUBLIC_URL}/images/littlebox.svg`}
+                          />
+                        </div>
+                        <RankText>
+                          <RankNum2>
+                            {postList[5] && postList[5].rank}등
+                          </RankNum2>
+                          <RankUniv2>
+                            {postList[5] && postList[5].college}
+                          </RankUniv2>
+                          <RankPercent2>
+                            {postList[5] && postList[5].participationRate}%
+                          </RankPercent2>
+                        </RankText>
+                      </RankBox>
+                    </motion.li>
+                    <motion.li variants={item}>
+                      <RankBox>
+                        <div>
+                          <img
+                            src={`${process.env.PUBLIC_URL}/images/littlebox.svg`}
+                          />
+                        </div>
+                        <RankText>
+                          <RankNum2>
+                            {postList[6] && postList[6].rank}등
+                          </RankNum2>
+                          <RankUniv2>
+                            {postList[6] && postList[6].college}
+                          </RankUniv2>
+                          <RankPercent2>
+                            {postList[6] && postList[6].participationRate}%
+                          </RankPercent2>
+                        </RankText>
+                      </RankBox>
+                    </motion.li>
+                    <motion.li variants={item}>
+                      <RankBox>
+                        <div>
+                          <img
+                            src={`${process.env.PUBLIC_URL}/images/littlebox.svg`}
+                          />
+                        </div>
+                        <RankText>
+                          <RankNum2>
+                            {postList[7] && postList[7].rank}등
+                          </RankNum2>
+                          <RankUniv2>
+                            {postList[7] && postList[7].college}
+                          </RankUniv2>
+                          <RankPercent2>
+                            {postList[7] && postList[7].participationRate}%
+                          </RankPercent2>
+                        </RankText>
+                      </RankBox>
+                    </motion.li>
+                    <motion.li variants={item}>
+                      <RankBox>
+                        <div>
+                          <img
+                            src={`${process.env.PUBLIC_URL}/images/littlebox.svg`}
+                          />
+                        </div>
+                        <RankText>
+                          <RankNum2>
+                            {postList[8] && postList[8].rank}등
+                          </RankNum2>
+                          <RankUniv2>
+                            {postList[8] && postList[8].college}
+                          </RankUniv2>
+                          <RankPercent2>
+                            {postList[8] && postList[8].participationRate}%
+                          </RankPercent2>
+                        </RankText>
+                      </RankBox>
+                    </motion.li>
+                  </BoxList>
+                </motion.ul>
+              </Body>
+            </>
+          )}
+        </BodyWrapper>
 
-      <Footer>
-        <Left>
-          <img
-            src={`${process.env.PUBLIC_URL}/images/footer-left.png`}
-            width="55px"
-            alt="footer"
-          />
-        </Left>
-        <FooterContentWrapper>
-          <Base>
+        <Footer>
+          <Left>
             <img
-              src={`${process.env.PUBLIC_URL}/images/footer-base.png`}
-              width="100%"
-              height="148px"
+              src={`${process.env.PUBLIC_URL}/images/footer-left.png`}
+              width="55px"
               alt="footer"
             />
-          </Base>
-          <FooterContent>
-            <ManagementWrapper>
-              <p className="bold">축제 총 기획</p>
-              <p>동덕여대 축제 준비 위원회</p>
-            </ManagementWrapper>
-            <Line>
+          </Left>
+          <FooterContentWrapper>
+            <Base>
               <img
-                src={`${process.env.PUBLIC_URL}/images/footer-line.png`}
-                width="253px"
+                src={`${process.env.PUBLIC_URL}/images/footer-base.png`}
+                width="100%"
+                height="148px"
                 alt="footer"
               />
-            </Line>
-            <FestivalWrapper>
-              <p id="marginBottom">2023 동덕여자대학교 대동제</p>
-              <p className="bold">동덕 uniVERSE</p>
-            </FestivalWrapper>
-            <Line>
-              <img
-                src={`${process.env.PUBLIC_URL}/images/footer-line.png`}
-                width="253px"
-                alt="footer"
-              />
-            </Line>
-            <DevelopmentWrapper>
-              <p className="bold">축제 웹사이트 제작</p>
-              <p>동덕여대 멋쟁이사자처럼</p>
-            </DevelopmentWrapper>
-          </FooterContent>
-        </FooterContentWrapper>
-        <Right>
-          <img
-            src={`${process.env.PUBLIC_URL}/images/footer-right.png`}
-            width="55px"
-            alt="footer"
-          />
-        </Right>
-      </Footer>
-    </Container>
+            </Base>
+            <FooterContent>
+              <ManagementWrapper>
+                <p className="bold">축제 총 기획</p>
+                <p>동덕여대 축제 준비 위원회</p>
+              </ManagementWrapper>
+              <Line>
+                <img
+                  src={`${process.env.PUBLIC_URL}/images/footer-line.png`}
+                  width="253px"
+                  alt="footer"
+                />
+              </Line>
+              <FestivalWrapper>
+                <p id="marginBottom">2023 동덕여자대학교 대동제</p>
+                <p className="bold">동덕 uniVERSE</p>
+              </FestivalWrapper>
+              <Line>
+                <img
+                  src={`${process.env.PUBLIC_URL}/images/footer-line.png`}
+                  width="253px"
+                  alt="footer"
+                />
+              </Line>
+              <DevelopmentWrapper>
+                <p className="bold">축제 웹사이트 제작</p>
+                <p>동덕여대 멋쟁이사자처럼</p>
+              </DevelopmentWrapper>
+            </FooterContent>
+          </FooterContentWrapper>
+          <Right>
+            <img
+              src={`${process.env.PUBLIC_URL}/images/footer-right.png`}
+              width="55px"
+              alt="footer"
+            />
+          </Right>
+        </Footer>
+      </Container>
+    </motion.div>
   );
 };
 export default CompetDetail;
