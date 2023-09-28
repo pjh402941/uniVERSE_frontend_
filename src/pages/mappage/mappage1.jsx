@@ -61,12 +61,9 @@ const Map = styled.div`
   flex-direction: column; /* Center vertically */
   align-items: center; /* Center horizontally */
   margin-top: 60px;
-  padding-bottom: 30%;
+  padding-bottom: 20%;
 `;
-const Mapframe = styled.div`
-  position: absolute;
-  margin-top: -29px;
-`;
+
 const Boothdetail_button = styled.div`
   position: relative;
   margin: auto;
@@ -178,19 +175,11 @@ const Mappage1 = () => {
             </Topbar>
             <Map>
               <img
-                src={`${process.env.PUBLIC_URL}/images/map_temp.png`}
-                width="280px"
-                height="280px"
+                src={`${process.env.PUBLIC_URL}/images/Boothmapp.png`}
+                width="337px"
+                height="383px"
                 alt="map"
               />
-              <Mapframe>
-                <img
-                  src={`${process.env.PUBLIC_URL}/images/map_mappage1.png`}
-                  width="337px"
-                  height="338.5px"
-                  alt="map"
-                />
-              </Mapframe>
             </Map>
             <Boothdetail_button>
               <img
