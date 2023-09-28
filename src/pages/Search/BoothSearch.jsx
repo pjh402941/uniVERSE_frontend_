@@ -144,6 +144,7 @@ const BoothWrapper = styled.div`
   &:first-child {
     margin-top: 0px;
   }
+  cursor: pointer;
 `;
 const BoothPic = styled.div`
   width: 95px;
@@ -249,6 +250,9 @@ const BoothSearch = () => {
   const navigateToBack = () => {
     navigate(-1);
   };
+  const goFirst = () => {
+    navigate("/");
+  };
   const handleOnKeyPress = (e) => {
     if (e.key === "Enter") {
       handleSearchSubmit(); // Enter 입력이 되면 클릭 이벤트 실행
@@ -278,11 +282,32 @@ const BoothSearch = () => {
     cursor: "pointer",
   });
 
+  const loadingimg = {
+    margin: "0 auto",
+    width: "10%",
+    height: "10%",
+  };
+  const loadingStyle = {
+    margin: "0 auto",
+    display: "flex",
+    justifyContent: "center",
+    alignContent: "center",
+    alignItems: "center",
+    width: "100%",
+    height: "100vh",
+  };
+  const imgStyle = {
+    borderRadius: "14px",
+    border: "1px solid #4fdfff",
+  };
+
   //axios_backend 연동작업 시작
   const [Day1booth, setDay1booth] = useState([]);
   const [Day2booth, setDay2booth] = useState([]);
   const [Day3booth, setDay3booth] = useState([]);
   const BACKEND_URL = "http://127.0.0.1:8000";
+  const [loading, setLoading] = useState(true);
+
   useEffect(
     function () {
       let apiUrl = "";
@@ -309,9 +334,11 @@ const BoothSearch = () => {
               setDay3booth(result.data);
             }
             console.log("성공");
+            setLoading(false);
           })
           .catch(function (error) {
             console.error("에러 발생 : ", error);
+            setLoading(false);
           });
       }
     },
@@ -339,10 +366,7 @@ const BoothSearch = () => {
         );
       });
   };
-  const imgStyle = {
-    borderRadius: "14px",
-    border: "1px solid #4fdfff",
-  };
+
   return (
     // 다른 페이지로 자연스럽게 넘어가기 위해 추가함
     <motion.div
@@ -358,7 +382,7 @@ const BoothSearch = () => {
                 src={`${process.env.PUBLIC_URL}/images/backbtn.png`}
                 width="24px"
                 height="24px"
-                onClick={() => navigateToBack()}
+                onClick={() => goFirst()}
               />
             </Back>
             <Toptitle>부스 배치도</Toptitle>
@@ -408,80 +432,94 @@ const BoothSearch = () => {
                   alt="footer"
                 />
               </Line>
-              <ContentBox>
-                {Day1booth.map((day1booth) => (
-                  <BoothWrapper
-                    key={day1booth.boothId}
-                    onClick={() =>
-                      navigate(`/booth-detail/${day1booth.boothId}/`)
-                    }
-                  >
-                    <BoothPic>
-                      <img
-                        src={`${BACKEND_URL}${day1booth.image}`}
-                        alt={day1booth.name}
-                        width="91px"
-                        height="91px"
-                        style={imgStyle}
-                      />
-                    </BoothPic>
-                    <BoothContent>
-                      <BoothName>{day1booth.name}</BoothName>
-                      <Boothintro>
-                        <BoothintroContent>
-                          {day1booth.introduce}
-                        </BoothintroContent>
-                      </Boothintro>
-                    </BoothContent>
-                  </BoothWrapper>
-                ))}
+              {loading ? (
+                <div style={loadingStyle}>
+                  <img
+                    src="/images/loading.gif"
+                    alt="로딩 중"
+                    width="50px"
+                    height="50px"
+                    style={loadingimg}
+                  />
+                </div>
+              ) : (
+                <>
+                  <ContentBox>
+                    {Day1booth.map((day1booth) => (
+                      <BoothWrapper
+                        key={day1booth.boothId}
+                        onClick={() =>
+                          navigate(`/booth-detail/${day1booth.boothId}/`)
+                        }
+                      >
+                        <BoothPic>
+                          <img
+                            src={`${BACKEND_URL}${day1booth.image}`}
+                            alt={day1booth.name}
+                            width="91px"
+                            height="91px"
+                            style={imgStyle}
+                          />
+                        </BoothPic>
+                        <BoothContent>
+                          <BoothName>{day1booth.name}</BoothName>
+                          <Boothintro>
+                            <BoothintroContent>
+                              {day1booth.introduce}
+                            </BoothintroContent>
+                          </Boothintro>
+                        </BoothContent>
+                      </BoothWrapper>
+                    ))}
 
-                {Day2booth.map((day2booth) => (
-                  <BoothWrapper
-                    key={day2booth.boothId}
-                    onClick={() =>
-                      navigate(`/booth-detail/${day2booth.boothId}/`)
-                    }
-                  >
-                    <BoothPic>
-                      <img
-                        src={`${BACKEND_URL}${day2booth.image}`}
-                        alt={day2booth.name}
-                        width="91px"
-                        height="91px"
-                        style={imgStyle}
-                      />
-                    </BoothPic>
-                    <BoothContent>
-                      <BoothName>{day2booth.name}</BoothName>
-                      <Boothintro>{day2booth.introduce}</Boothintro>
-                    </BoothContent>
-                  </BoothWrapper>
-                ))}
+                    {Day2booth.map((day2booth) => (
+                      <BoothWrapper
+                        key={day2booth.boothId}
+                        onClick={() =>
+                          navigate(`/booth-detail/${day2booth.boothId}/`)
+                        }
+                      >
+                        <BoothPic>
+                          <img
+                            src={`${BACKEND_URL}${day2booth.image}`}
+                            alt={day2booth.name}
+                            width="91px"
+                            height="91px"
+                            style={imgStyle}
+                          />
+                        </BoothPic>
+                        <BoothContent>
+                          <BoothName>{day2booth.name}</BoothName>
+                          <Boothintro>{day2booth.introduce}</Boothintro>
+                        </BoothContent>
+                      </BoothWrapper>
+                    ))}
 
-                {Day3booth.map((day3booth) => (
-                  <BoothWrapper
-                    key={day3booth.boothId}
-                    onClick={() =>
-                      navigate(`/booth-detail/${day3booth.boothId}/`)
-                    }
-                  >
-                    <BoothPic>
-                      <img
-                        src={`${BACKEND_URL}${day3booth.image}`}
-                        alt={day3booth.name}
-                        width="91px"
-                        height="91px"
-                        style={imgStyle}
-                      />
-                    </BoothPic>
-                    <BoothContent>
-                      <BoothName>{day3booth.name}</BoothName>
-                      <Boothintro>{day3booth.introduce}</Boothintro>
-                    </BoothContent>
-                  </BoothWrapper>
-                ))}
-              </ContentBox>
+                    {Day3booth.map((day3booth) => (
+                      <BoothWrapper
+                        key={day3booth.boothId}
+                        onClick={() =>
+                          navigate(`/booth-detail/${day3booth.boothId}/`)
+                        }
+                      >
+                        <BoothPic>
+                          <img
+                            src={`${BACKEND_URL}${day3booth.image}`}
+                            alt={day3booth.name}
+                            width="91px"
+                            height="91px"
+                            style={imgStyle}
+                          />
+                        </BoothPic>
+                        <BoothContent>
+                          <BoothName>{day3booth.name}</BoothName>
+                          <Boothintro>{day3booth.introduce}</Boothintro>
+                        </BoothContent>
+                      </BoothWrapper>
+                    ))}
+                  </ContentBox>
+                </>
+              )}
             </ContentWrapper>
           </Body>
         </BodyWrapper>

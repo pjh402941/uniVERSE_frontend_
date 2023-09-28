@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 
 const Container = styled.div`
   align-items: center;
@@ -27,35 +28,34 @@ const Container = styled.div`
   }
 `;
 // 상단
-const TopContainer = styled.div`
-  margin-top: 6px;
-  /*기본스타일*/
-  width: 100%;
-  height: 60px;
+
+const Topbar = styled.div`
+  display: flex;
+  justify-content: space-between;
+  height: 70px;
+  margin-bottom: 5px;
+  box-sizing: border-box;
+  align-items: center;
+  padding-left: 12px;
 `;
-const GoBack = styled.img`
-  position: relative;
-  width: 25px;
-  top: 10px;
-  left: -37%;
+const Back = styled.div`
+  cursor: pointer;
+  position: absolute;
+  left: 27px;
 `;
-const TopText = styled.span`
-design: flex
-  margin: 0px auto;
-  width: 60px;
-  height: 40px;
-  top: 2px;
+const Toptitle = styled.div`
   color: #fff;
-  font-family: SUIT;
-  font-size: 18px;
+  cursor: pointer;
+  margin: auto;
+  font-size: 20px;
   font-style: normal;
-  font-weight: 900;
+  font-weight: 600;
   line-height: normal;
+  padding-bottom: 5px;
 `;
 
 const BodyWrapper = styled.div`
   min-height: calc(100vh - 151px); //푸터 공간 확보
-  padding-top: 18px;
 `;
 
 const TopIndex = styled.div`
@@ -218,6 +218,9 @@ const Right = styled.div`
 
 const IntroFestival = () => {
   const navigate = useNavigate();
+  const GoBack = () => {
+    navigate("/");
+  };
 
   const GoCommittee = () => {
     navigate("/Committee");
@@ -256,86 +259,101 @@ const IntroFestival = () => {
 
   return (
     <Container>
-      <TopContainer>
-        <GoBack
-          src={`${process.env.PUBLIC_URL}/images/top-backBtn.png`}
-        ></GoBack>
-        <TopText>소개</TopText>
-      </TopContainer>
-
-      <BodyWrapper>
-        <div style={{ margin: "0px auto", position: "relative" }}>
-          <TopIndex>
-            <Index1>축제</Index1>
-            <Index2 onClick={GoCommittee}>축.운.위</Index2>
-            <Index3 onClick={GoLion}>멋사 11기</Index3>
-          </TopIndex>
-
-          <NameCode
-            style={{
-              top: "7.7%", //absolute 쓸거면 top은 %로
-              position: "absolute",
-              left: "18%",
-              // transform: "translateX(-30%)",
-            }}
-          >
-            동덕 uniVERSE
-          </NameCode>
-
-          <InstagramBox>
-            <span style={instagramText}>instagram</span>
-            <a
-              style={linkStyle}
-              href="https://instagram.com/ddwu.festival2023?igshid=MzRlODBiNWFlZA=="
-            >
-              @ddwu.festival2023
-            </a>
-          </InstagramBox>
-
-          <TopBox>
-            <img
-              src={`${process.env.PUBLIC_URL}/images/post.png`}
-              width="73%"
-              style={{ marginTop: "13%" }}
-            />
-          </TopBox>
-
-          <ContentBox>
-            <P1>“메이데이, 메이데이. 들리면 응답 바란다.”</P1>
-            <p>
-              {" "}
-              잠을 깨우는 낯선 이의 무전 소리.
-              <br />
-              다급한 목소리에 두 눈을 떠보니 보이는 건,
-              <br /> 어딘가 묘한 기시감을 풍기는 학교의 모습이었다.
-              <br /> 똑같은 학교의 건물들과 풍경. 하지만 이유모를 낯선 이 느낌.
-              <br /> 분명, 우리 학교이지만 낯선 이 곳.
-              <br /> 혹시 영화 속에서만 보던 또 다른 시공간인 멀티버스는
-              아닐까…?
-            </p>
-            <P2>
-              그 순간, 밤이 찾아오고 이전엔 볼 수 없었던
-              <br /> 화려한 우주 사이로 빨려 들어가게 되는데…!{" "}
-            </P2>
-            <p>
-              우리가 만난다는 것은 너의 우주와 나의 우주가 맞닿아 있음을 뜻한다.
-              <br />
-              우리는 얼마나 많은 우주들을 공유하고 확장하며 살아가고 있는가.
-            </p>
-            <P2>
-              우주, 만남, 확장, 또다른 세상(멀티버스)
-              <br />
-              UNIVERSE, ENCOUNTER, EXPANSION, MULTIVERSE
-            </P2>
-          </ContentBox>
-
+      <Topbar>
+        <Back>
           <img
-            src={`${process.env.PUBLIC_URL}/images/Frame-festival (2).png`}
-            style={{ maxWidth: "88%", height: "auto" }}
+            src={`${process.env.PUBLIC_URL}/images/backbtn.png`}
+            width="24px"
+            height="24px"
+            onClick={() => GoBack()}
           />
-        </div>
-      </BodyWrapper>
+        </Back>
+        <Toptitle>소개</Toptitle>
+      </Topbar>
+      <motion.div
+        initial={{ scale: 0.8 }}
+        animate={{ scale: 1 }}
+        transition={{
+          type: "spring",
+          stiffness: 260,
+          damping: 20,
+        }}
+      >
+        <BodyWrapper>
+          <div style={{ margin: "0px auto", position: "relative" }}>
+            <TopIndex>
+              <Index1>축제</Index1>
+              <Index2 onClick={GoCommittee}>축.운.위</Index2>
+              <Index3 onClick={GoLion}>멋사 11기</Index3>
+            </TopIndex>
 
+            <NameCode
+              style={{
+                top: "7.7%", //absolute 쓸거면 top은 %로
+                position: "absolute",
+                left: "18%",
+                // transform: "translateX(-30%)",
+              }}
+            >
+              동덕 uniVERSE
+            </NameCode>
+
+            <InstagramBox>
+              <span style={instagramText}>instagram</span>
+              <a
+                style={linkStyle}
+                href="https://instagram.com/ddwu.festival2023?igshid=MzRlODBiNWFlZA=="
+              >
+                @ddwu.festival2023
+              </a>
+            </InstagramBox>
+
+            <TopBox>
+              <img
+                src={`${process.env.PUBLIC_URL}/images/post.png`}
+                width="73%"
+                style={{ marginTop: "13%" }}
+              />
+            </TopBox>
+
+            <ContentBox>
+              <P1>“메이데이, 메이데이. 들리면 응답 바란다.”</P1>
+              <p>
+                {" "}
+                잠을 깨우는 낯선 이의 무전 소리.
+                <br />
+                다급한 목소리에 두 눈을 떠보니 보이는 건,
+                <br /> 어딘가 묘한 기시감을 풍기는 학교의 모습이었다.
+                <br /> 똑같은 학교의 건물들과 풍경. 하지만 이유모를 낯선 이
+                느낌.
+                <br /> 분명, 우리 학교이지만 낯선 이 곳.
+                <br /> 혹시 영화 속에서만 보던 또 다른 시공간인 멀티버스는
+                아닐까…?
+              </p>
+              <P2>
+                그 순간, 밤이 찾아오고 이전엔 볼 수 없었던
+                <br /> 화려한 우주 사이로 빨려 들어가게 되는데…!{" "}
+              </P2>
+              <p>
+                우리가 만난다는 것은 너의 우주와 나의 우주가 맞닿아 있음을
+                뜻한다.
+                <br />
+                우리는 얼마나 많은 우주들을 공유하고 확장하며 살아가고 있는가.
+              </p>
+              <P2>
+                우주, 만남, 확장, 또다른 세상(멀티버스)
+                <br />
+                UNIVERSE, ENCOUNTER, EXPANSION, MULTIVERSE
+              </P2>
+            </ContentBox>
+
+            <img
+              src={`${process.env.PUBLIC_URL}/images/Frame-festival (2).png`}
+              style={{ maxWidth: "88%", height: "auto" }}
+            />
+          </div>
+        </BodyWrapper>
+      </motion.div>
       <Footer>
         <Left>
           <img
