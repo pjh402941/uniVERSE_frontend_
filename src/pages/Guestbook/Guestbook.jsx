@@ -203,7 +203,7 @@ const Guestbook = () => {
 
   const [comment, setComment] = useState("");
   const [commentsWithSomBox, setCommentsWithSomBox] = useState([]);
-
+  const BACKEND_URL = "http://3.36.142.19" || "ec2-3-36-142-19.ap-northeast-2.compute.amazonaws.com" || "127.0.0.1:8000";
   const commentRefs = useRef([]); // 새 댓글에 포커스 맞추기
 
   useEffect(() => {
@@ -221,7 +221,7 @@ const Guestbook = () => {
   const addComment = async () => {
     if (comment.trim() !== "") {
       try {
-        const response = await axios.post(`http://127.0.0.1:8000/guestbook/`, {
+        const response = await axios.post(`${BACKEND_URL}/guestbook/`, {
           content: comment,
         });
 
@@ -230,7 +230,7 @@ const Guestbook = () => {
           console.log("댓글이 성공적으로 생성되었습니다.");
           const newComment = {
             text: comment,
-            image: "${process.env.PUBLIC_URL}/images/somsom.png",
+            image: "${process.env.PUBLIC_URL}/static/images/somsom.png",
           };
           setCommentsWithSomBox([...commentsWithSomBox, newComment]);
           setComment("");
@@ -262,11 +262,11 @@ const Guestbook = () => {
     const loadComment = async () => {
       setLoading(true);
       try {
-        const response = await axios.get(`http://127.0.0.1:8000/guestbook/`);
+        const response = await axios.get(`${BACKEND_URL}/guestbook/`);
         if (response.status === 200) {
           const loadedComments = response.data.map((commentData) => ({
             text: commentData.content,
-            image: `${process.env.PUBLIC_URL}/images/somsom.png`,
+            image: `${process.env.PUBLIC_URL}/static/images/somsom.png`,
           }));
           setCommentsWithSomBox(loadedComments);
         } else {
@@ -287,7 +287,7 @@ const Guestbook = () => {
       <Container>
         <Backbtn>
           <img
-            src={`${process.env.PUBLIC_URL}/images/backbtn.png`}
+            src={`${process.env.PUBLIC_URL}/static/images/backbtn.png`}
             alt="backbtn"
             width="26px"
             onClick={GoBack}
@@ -297,7 +297,7 @@ const Guestbook = () => {
         {loading ? (
           <div style={loadingStyle}>
             <img
-              src="/images/loading.gif"
+              src="/static/images/loading.gif"
               alt="로딩 중"
               width="50px"
               height="50px"
@@ -308,7 +308,7 @@ const Guestbook = () => {
           <>
             <CommentWrapper>
               <img
-                src={`${process.env.PUBLIC_URL}/images/cmtwrapper.png`}
+                src={`${process.env.PUBLIC_URL}/static/images/cmtwrapper.png`}
                 alt="cmtwrapper"
                 width="75%"
                 height="540px"
@@ -322,7 +322,7 @@ const Guestbook = () => {
                 {commentsWithSomBox.map((item, index) => (
                   <div key={index}>
                     <StyledImage
-                      src={`${process.env.PUBLIC_URL}/images/somsom.png`}
+                      src={`${process.env.PUBLIC_URL}/static/images/somsom.png`}
                       alt={`comment-image-${index}`}
                     />
                     <StyledBox alt={`comment-box-${index}`}>
@@ -337,7 +337,7 @@ const Guestbook = () => {
         )}
         <CommentBox>
           <img
-            src={`${process.env.PUBLIC_URL}/images/cmtbox.png`}
+            src={`${process.env.PUBLIC_URL}/static/images/cmtbox.png`}
             alt="cmtbox"
             width="70%"
             style={{ minWidth: "337px", maxWidth: "400px", marginTop: "-5px" }}
@@ -357,7 +357,7 @@ const Guestbook = () => {
         </CommentBox>
         <Send onClick={addComment}>
           <img
-            src={`${process.env.PUBLIC_URL}/images/send.png`}
+            src={`${process.env.PUBLIC_URL}/static/images/send.png`}
             alt="send"
             width="35px"
           />

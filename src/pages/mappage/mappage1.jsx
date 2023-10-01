@@ -165,7 +165,7 @@ const Mappage1 = () => {
             <Topbar>
               <Back>
                 <img
-                  src={`${process.env.PUBLIC_URL}/images/backbtn.png`}
+                  src={`${process.env.PUBLIC_URL}/static/images/backbtn.png`}
                   width="24px"
                   height="24px"
                   onClick={() => navigate(-1)}
@@ -175,7 +175,7 @@ const Mappage1 = () => {
             </Topbar>
             <Map>
               <img
-                src={`${process.env.PUBLIC_URL}/images/Boothmap.png`}
+                src={`${process.env.PUBLIC_URL}/static/images/Boothmap.png`}
                 width="350px"
                 height="600px"
                 alt="map"
@@ -183,7 +183,7 @@ const Mappage1 = () => {
             </Map>
             <Boothdetail_button>
               <img
-                src={`${process.env.PUBLIC_URL}/images/boothdetail_go_button.png`}
+                src={`${process.env.PUBLIC_URL}/static/images/boothdetail_go_button.png`}
                 width="337px"
                 height="62px"
                 alt="boothdetail_button"
@@ -198,7 +198,7 @@ const Mappage1 = () => {
         <Footer>
           <Left>
             <img
-              src={`${process.env.PUBLIC_URL}/images/footer-left.png`}
+              src={`${process.env.PUBLIC_URL}/static/images/footer-left.png`}
               width="55px"
               alt="footer"
             />
@@ -206,7 +206,7 @@ const Mappage1 = () => {
           <FooterContentWrapper>
             <Base>
               <img
-                src={`${process.env.PUBLIC_URL}/images/footer-base.png`}
+                src={`${process.env.PUBLIC_URL}/static/images/footer-base.png`}
                 width="100%"
                 height="148px"
                 alt="footer"
@@ -219,7 +219,7 @@ const Mappage1 = () => {
               </ManagementWrapper>
               <Line>
                 <img
-                  src={`${process.env.PUBLIC_URL}/images/footer-line.png`}
+                  src={`${process.env.PUBLIC_URL}/static/images/footer-line.png`}
                   width="253px"
                   alt="footer"
                 />
@@ -230,7 +230,7 @@ const Mappage1 = () => {
               </FestivalWrapper>
               <Line>
                 <img
-                  src={`${process.env.PUBLIC_URL}/images/footer-line.png`}
+                  src={`${process.env.PUBLIC_URL}/static/images/footer-line.png`}
                   width="253px"
                   alt="footer"
                 />
@@ -243,7 +243,7 @@ const Mappage1 = () => {
           </FooterContentWrapper>
           <Right>
             <img
-              src={`${process.env.PUBLIC_URL}/images/footer-right.png`}
+              src={`${process.env.PUBLIC_URL}/static/images/footer-right.png`}
               width="55px"
               alt="footer"
             />

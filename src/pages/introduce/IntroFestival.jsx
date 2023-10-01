@@ -262,7 +262,7 @@ const IntroFestival = () => {
       <Topbar>
         <Back>
           <img
-            src={`${process.env.PUBLIC_URL}/images/backbtn.png`}
+            src={`${process.env.PUBLIC_URL}/static/images/backbtn.png`}
             width="24px"
             height="24px"
             onClick={() => GoBack()}
@@ -310,7 +310,7 @@ const IntroFestival = () => {
 
             <TopBox>
               <img
-                src={`${process.env.PUBLIC_URL}/images/post.png`}
+                src={`${process.env.PUBLIC_URL}/static/images/post.png`}
                 width="73%"
                 style={{ marginTop: "0%" }}
               />
@@ -348,7 +348,7 @@ const IntroFestival = () => {
             </ContentBox>
 
             <img
-              src={`${process.env.PUBLIC_URL}/images/Frame-festival (2).png`}
+              src={`${process.env.PUBLIC_URL}/static/images/Frame-festival (2).png`}
               style={{ maxWidth: "88%", height: "auto" }}
             />
           </div>
@@ -357,7 +357,7 @@ const IntroFestival = () => {
       <Footer>
         <Left>
           <img
-            src={`${process.env.PUBLIC_URL}/images/footer-left.png`}
+            src={`${process.env.PUBLIC_URL}/static/images/footer-left.png`}
             width="55px"
             alt="footer"
           />
@@ -365,7 +365,7 @@ const IntroFestival = () => {
         <FooterContentWrapper>
           <Base>
             <img
-              src={`${process.env.PUBLIC_URL}/images/footer-base.png`}
+              src={`${process.env.PUBLIC_URL}/static/images/footer-base.png`}
               width="100%"
               height="148px"
               alt="footer"
@@ -378,7 +378,7 @@ const IntroFestival = () => {
             </ManagementWrapper>
             <Line>
               <img
-                src={`${process.env.PUBLIC_URL}/images/footer-line.png`}
+                src={`${process.env.PUBLIC_URL}/static/images/footer-line.png`}
                 width="253px"
                 alt="footer"
               />
@@ -389,7 +389,7 @@ const IntroFestival = () => {
             </FestivalWrapper>
             <Line>
               <img
-                src={`${process.env.PUBLIC_URL}/images/footer-line.png`}
+                src={`${process.env.PUBLIC_URL}/static/images/footer-line.png`}
                 width="253px"
                 alt="footer"
               />
@@ -402,7 +402,7 @@ const IntroFestival = () => {
         </FooterContentWrapper>
         <Right>
           <img
-            src={`${process.env.PUBLIC_URL}/images/footer-right.png`}
+            src={`${process.env.PUBLIC_URL}/static/images/footer-right.png`}
             width="55px"
             alt="footer"
           />

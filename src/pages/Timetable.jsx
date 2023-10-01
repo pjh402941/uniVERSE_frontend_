@@ -10,7 +10,7 @@ const Container = styled.div`
   min-height: 100vh;
   position: relative;
   text-align: center;
-  background-image: url(${process.env.PUBLIC_URL}/images/timetable_back.svg);
+  background-image: url(${process.env.PUBLIC_URL}/static/images/timetable_back.svg);
   background-size: cover;
   -ms-overflow-style: none;
   scrollbar-width: none;
@@ -174,7 +174,7 @@ const Timetable = () => {
           <Body>
             {/* 이미지가 스크롤되지 않도록 .scrollbox 밖에 배치 */}
             <img
-              src={`${process.env.PUBLIC_URL}/images/back_timetable.svg`}
+              src={`${process.env.PUBLIC_URL}/static/images/back_timetable.svg`}
               alt="back"
               style={{
                 top: "29px",
@@ -187,7 +187,7 @@ const Timetable = () => {
             />
 
             <img
-              src={`${process.env.PUBLIC_URL}/images/timetable_font.svg`}
+              src={`${process.env.PUBLIC_URL}/static/images/timetable_font.svg`}
               alt="timetable_font"
               style={{
                 top: "29px",
@@ -202,7 +202,7 @@ const Timetable = () => {
 
               <div className="date_wed">
                 <img
-                  src={`${process.env.PUBLIC_URL}/images/wed_table.svg`}
+                  src={`${process.env.PUBLIC_URL}/static/images/wed_table.svg`}
                   alt="wed"
                   style={{
                     top: "60px",
@@ -214,7 +214,7 @@ const Timetable = () => {
                 <div>
                   {/* 여기서부터는 날짜 이미지들임 */}
                   <img
-                    src={`${process.env.PUBLIC_URL}/images/WED_t_b.svg`}
+                    src={`${process.env.PUBLIC_URL}/static/images/WED_t_b.svg`}
                     alt="수요일"
                     style={{
                       position: "relative",
@@ -227,7 +227,7 @@ const Timetable = () => {
                 </div>
                 <div>
                   <img
-                    src={`${process.env.PUBLIC_URL}/images/THU_t.svg`}
+                    src={`${process.env.PUBLIC_URL}/static/images/THU_t.svg`}
                     alt="목요일"
                     style={{
                       position: "relative",
@@ -239,7 +239,7 @@ const Timetable = () => {
                 </div>
                 <div>
                   <img
-                    src={`${process.env.PUBLIC_URL}/images/FRI_t.svg`}
+                    src={`${process.env.PUBLIC_URL}/static/images/FRI_t.svg`}
                     alt="금요일"
                     style={{
                       position: "relative",
@@ -255,7 +255,7 @@ const Timetable = () => {
               {/* 목요일 타임 테이블 부분 */}
               <div className="date_thu">
                 <img
-                  src={`${process.env.PUBLIC_URL}/images/thu_table.svg`}
+                  src={`${process.env.PUBLIC_URL}/static/images/thu_table.svg`}
                   alt="thu"
                   style={{
                     top: "60px",
@@ -266,7 +266,7 @@ const Timetable = () => {
                 <div>
                   {/* 여기서부터는 날짜 이미지들임 */}
                   <img
-                    src={`${process.env.PUBLIC_URL}/images/WED_t.svg`}
+                    src={`${process.env.PUBLIC_URL}/static/images/WED_t.svg`}
                     alt="수요일"
                     style={{
                       position: "relative",
@@ -279,7 +279,7 @@ const Timetable = () => {
                 </div>
                 <div>
                   <img
-                    src={`${process.env.PUBLIC_URL}/images/THU_t_b.svg`}
+                    src={`${process.env.PUBLIC_URL}/static/images/THU_t_b.svg`}
                     alt="목요일"
                     style={{
                       position: "relative",
@@ -291,7 +291,7 @@ const Timetable = () => {
                 </div>
                 <div>
                   <img
-                    src={`${process.env.PUBLIC_URL}/images/FRI_t.svg`}
+                    src={`${process.env.PUBLIC_URL}/static/images/FRI_t.svg`}
                     alt="금요일"
                     style={{
                       position: "relative",
@@ -307,7 +307,7 @@ const Timetable = () => {
               {/* 금요일 타임 테이블 부분 */}
               <div className="date_fri">
                 <img
-                  src={`${process.env.PUBLIC_URL}/images/fri_table.svg`}
+                  src={`${process.env.PUBLIC_URL}/static/images/fri_table.svg`}
                   alt="fri"
                   style={{
                     top: "60px",
@@ -318,7 +318,7 @@ const Timetable = () => {
                 <div>
                   {/* 여기서부터는 날짜 이미지들임 */}
                   <img
-                    src={`${process.env.PUBLIC_URL}/images/WED_t.svg`}
+                    src={`${process.env.PUBLIC_URL}/static/images/WED_t.svg`}
                     alt="수요일"
                     style={{
                       position: "relative",
@@ -331,7 +331,7 @@ const Timetable = () => {
                 </div>
                 <div>
                   <img
-                    src={`${process.env.PUBLIC_URL}/images/THU_t.svg`}
+                    src={`${process.env.PUBLIC_URL}/static/images/THU_t.svg`}
                     alt="목요일"
                     style={{
                       position: "relative",
@@ -343,7 +343,7 @@ const Timetable = () => {
                 </div>
                 <div>
                   <img
-                    src={`${process.env.PUBLIC_URL}/images/FRI_t_b.svg`}
+                    src={`${process.env.PUBLIC_URL}/static/images/FRI_t_b.svg`}
                     alt="금요일"
                     style={{
                       position: "relative",
@@ -371,7 +371,7 @@ const Timetable = () => {
         <Footer>
           <Left>
             <img
-              src={`${process.env.PUBLIC_URL}/images/footer-left.png`}
+              src={`${process.env.PUBLIC_URL}/static/images/footer-left.png`}
               width="55px"
               alt="footer"
             />
@@ -379,7 +379,7 @@ const Timetable = () => {
           <FooterContentWrapper>
             <Base>
               <img
-                src={`${process.env.PUBLIC_URL}/images/footer-base.png`}
+                src={`${process.env.PUBLIC_URL}/static/images/footer-base.png`}
                 width="100%"
                 height="148px"
                 alt="footer"
@@ -392,7 +392,7 @@ const Timetable = () => {
               </ManagementWrapper>
               <Line>
                 <img
-                  src={`${process.env.PUBLIC_URL}/images/footer-line.png`}
+                  src={`${process.env.PUBLIC_URL}/static/images/footer-line.png`}
                   width="253px"
                   alt="footer"
                 />
@@ -403,7 +403,7 @@ const Timetable = () => {
               </FestivalWrapper>
               <Line>
                 <img
-                  src={`${process.env.PUBLIC_URL}/images/footer-line.png`}
+                  src={`${process.env.PUBLIC_URL}/static/images/footer-line.png`}
                   width="253px"
                   alt="footer"
                 />
@@ -416,7 +416,7 @@ const Timetable = () => {
           </FooterContentWrapper>
           <Right>
             <img
-              src={`${process.env.PUBLIC_URL}/images/footer-right.png`}
+              src={`${process.env.PUBLIC_URL}/static/images/footer-right.png`}
               width="55px"
               alt="footer"
             />

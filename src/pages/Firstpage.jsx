@@ -14,7 +14,7 @@ const Container = styled.div`
   min-height: 200vh;
   position: relative;
   text-align: center;
-  background-image: url(${process.env.PUBLIC_URL}/images/main_back.svg);
+  background-image: url(${process.env.PUBLIC_URL}/static/images/main_back.svg);
   background-size: cover;
   -ms-overflow-style: none;
   scrollbar-width: none;
@@ -158,7 +158,7 @@ const Firstpage = () => {
             {/* 로고 부분 */}
             <img
               className="blur-image"
-              src={`${process.env.PUBLIC_URL}/images/main_logo.svg`}
+              src={`${process.env.PUBLIC_URL}/static/images/main_logo.svg`}
               alt="timetable_font"
               style={{
                 width: "300px",
@@ -178,7 +178,7 @@ const Firstpage = () => {
           >
             <div className="timetable_planet">
               <img
-                src={`${process.env.PUBLIC_URL}/images/timetable_planet.png`}
+                src={`${process.env.PUBLIC_URL}/static/images/timetable_planet.png`}
                 alt="행성"
                 style={{
                   position: "relative",
@@ -193,7 +193,7 @@ const Firstpage = () => {
             </div>
             <div className="timetable_name">
               <img
-                src={`${process.env.PUBLIC_URL}/images/timetable_name.svg`}
+                src={`${process.env.PUBLIC_URL}/static/images/timetable_name.svg`}
                 alt="네임택"
                 style={{
                   position: "relative",
@@ -208,7 +208,7 @@ const Firstpage = () => {
             </div>
             <div className="timetable_som">
               <img
-                src={`${process.env.PUBLIC_URL}/images/timetable_som.png`}
+                src={`${process.env.PUBLIC_URL}/static/images/timetable_som.png`}
                 alt="타임테이블 솜솜이"
                 style={{
                   position: "relative",
@@ -222,7 +222,7 @@ const Firstpage = () => {
             </div>
             <div className="timetable_spaceship">
               <img
-                src={`${process.env.PUBLIC_URL}/images/timetable_spaceship.png`}
+                src={`${process.env.PUBLIC_URL}/static/images/timetable_spaceship.png`}
                 alt="타임테이블 우주선"
                 style={{
                   position: "relative",
@@ -241,7 +241,7 @@ const Firstpage = () => {
           <div className="map" style={{ height: "250px", marginTop: "40px" }}>
             <div className="map_planet">
               <img
-                src={`${process.env.PUBLIC_URL}/images/map_planet.png`}
+                src={`${process.env.PUBLIC_URL}/static/images/map_planet.png`}
                 alt="행성"
                 style={{
                   position: "relative",
@@ -255,7 +255,7 @@ const Firstpage = () => {
             </div>
             <div className="map_name">
               <img
-                src={`${process.env.PUBLIC_URL}/images/map_name.svg`}
+                src={`${process.env.PUBLIC_URL}/static/images/map_name.svg`}
                 alt="네임택"
                 style={{
                   position: "relative",
@@ -271,7 +271,7 @@ const Firstpage = () => {
 
             <div className="map_som" style={{ marginTop: "-40px" }}>
               <img
-                src={`${process.env.PUBLIC_URL}/images/map_som.png`}
+                src={`${process.env.PUBLIC_URL}/static/images/map_som.png`}
                 alt="솜솜이"
                 style={{
                   position: "relative",
@@ -290,7 +290,7 @@ const Firstpage = () => {
           <div className="talk" style={{ height: "250px", marginTop: "-30px" }}>
             <div className="talk_planet">
               <img
-                src={`${process.env.PUBLIC_URL}/images/talk_planet2.png`}
+                src={`${process.env.PUBLIC_URL}/static/images/talk_planet2.png`}
                 alt="행성"
                 style={{
                   position: "relative",
@@ -304,7 +304,7 @@ const Firstpage = () => {
             </div>
             <div className="talk_name">
               <img
-                src={`${process.env.PUBLIC_URL}/images/talk_name.svg`}
+                src={`${process.env.PUBLIC_URL}/static/images/talk_name.svg`}
                 alt="네임택"
                 style={{
                   position: "relative",
@@ -320,7 +320,7 @@ const Firstpage = () => {
 
             <div className="talk_som">
               <img
-                src={`${process.env.PUBLIC_URL}/images/talk_som.png`}
+                src={`${process.env.PUBLIC_URL}/static/images/talk_som.png`}
                 alt="솜솜이"
                 style={{
                   position: "relative",
@@ -342,7 +342,7 @@ const Firstpage = () => {
           >
             <div className="competition_planet">
               <img
-                src={`${process.env.PUBLIC_URL}/images/competition_planet.png`}
+                src={`${process.env.PUBLIC_URL}/static/images/competition_planet.png`}
                 alt="행성"
                 style={{
                   position: "relative",
@@ -356,7 +356,7 @@ const Firstpage = () => {
             </div>
             <div className="competition_name">
               <img
-                src={`${process.env.PUBLIC_URL}/images/competiton_name.svg`}
+                src={`${process.env.PUBLIC_URL}/static/images/competiton_name.svg`}
                 alt="네임택"
                 style={{
                   position: "relative",
@@ -372,7 +372,7 @@ const Firstpage = () => {
 
             <div className="competition_som" style={{ marginTop: "-100px" }}>
               <img
-                src={`${process.env.PUBLIC_URL}/images/competiton_som.png`}
+                src={`${process.env.PUBLIC_URL}/static/images/competiton_som.png`}
                 alt="솜솜이"
                 style={{
                   position: "relative",
@@ -389,7 +389,7 @@ const Firstpage = () => {
               style={{ marginTop: "-100px" }}
             >
               <img
-                src={`${process.env.PUBLIC_URL}/images/competiton_spaceship.png`}
+                src={`${process.env.PUBLIC_URL}/static/images/competiton_spaceship.png`}
                 alt="우주선"
                 style={{
                   position: "relative",
@@ -411,7 +411,7 @@ const Firstpage = () => {
           >
             <div className="introduce_planet">
               <img
-                src={`${process.env.PUBLIC_URL}/images/introduce_planet.png`}
+                src={`${process.env.PUBLIC_URL}/static/images/introduce_planet.png`}
                 alt="행성"
                 style={{
                   position: "relative",
@@ -425,7 +425,7 @@ const Firstpage = () => {
             </div>
             <div className="introduce_name">
               <img
-                src={`${process.env.PUBLIC_URL}/images/introduce_name.svg`}
+                src={`${process.env.PUBLIC_URL}/static/images/introduce_name.svg`}
                 alt="네임택"
                 style={{
                   position: "relative",
@@ -440,7 +440,7 @@ const Firstpage = () => {
             </div>
             <div className="introduce_som" style={{ marginTop: "-200px" }}>
               <img
-                src={`${process.env.PUBLIC_URL}/images/introduce_som.png`}
+                src={`${process.env.PUBLIC_URL}/static/images/introduce_som.png`}
                 alt="솜솜이"
                 style={{
                   position: "relative",
@@ -457,7 +457,7 @@ const Firstpage = () => {
               style={{ marginTop: "-200px" }}
             >
               <img
-                src={`${process.env.PUBLIC_URL}/images/introduce_spaceship.png`}
+                src={`${process.env.PUBLIC_URL}/static/images/introduce_spaceship.png`}
                 alt="우주선"
                 style={{
                   position: "relative",

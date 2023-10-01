@@ -13,7 +13,7 @@ const Container = styled.div`
   text-align: center;
   // background-color: black;
   // 추가
-  background-image: url("${process.env.PUBLIC_URL}/images/competbg.svg");
+  background-image: url("${process.env.PUBLIC_URL}/static/images/competbg.svg");
   background-size: cover;
   background-position: center;
 
@@ -287,13 +287,13 @@ const CompetDetail = () => {
   // 연동 코드 (여기서 부터 추가!!!)
   const [postList, setPostList] = useState([]); // 배열에 받아서 저장
   const [loading, setLoading] = useState(false);
-
+  const BACKEND_URL = "http://3.36.142.19" || "ec2-3-36-142-19.ap-northeast-2.compute.amazonaws.com" || "127.0.0.1:8000";
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
       try {
         // API 호출
-        const response = await axios.get("http://127.0.0.1:8000/competition/");
+        const response = await axios.get(`${BACKEND_URL}/competition/`);
         setPostList(response.data.collegeRank); //collegeRank 배열 저장
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -335,7 +335,7 @@ const CompetDetail = () => {
           {loading ? (
             <div style={loadingStyle}>
               <img
-                src="/images/loading.gif"
+                src="/static/images/loading.gif"
                 alt="로딩 중"
                 width="50px"
                 height="50px"
@@ -348,7 +348,7 @@ const CompetDetail = () => {
                 <Box>
                   <BackBtn onClick={goBack}>
                     <img
-                      src={`${process.env.PUBLIC_URL}/images/backbtn.svg`}
+                      src={`${process.env.PUBLIC_URL}/static/images/backbtn.svg`}
                       width="25px"
                       alt="titlebar"
                     />
@@ -357,7 +357,7 @@ const CompetDetail = () => {
                 </Box>
                 <TitleBar>
                   <img
-                    src={`${process.env.PUBLIC_URL}/images/titlebar2.svg`}
+                    src={`${process.env.PUBLIC_URL}/static/images/titlebar2.svg`}
                     style={{
                       width: "100%",
                       height: "auto",
@@ -378,7 +378,7 @@ const CompetDetail = () => {
                       <TopBox>
                         <ImgBox>
                           <img
-                            src={`${process.env.PUBLIC_URL}/images/1stdept.svg`}
+                            src={`${process.env.PUBLIC_URL}/static/images/1stdept.svg`}
                           />
                         </ImgBox>
                         <TopText>
@@ -398,7 +398,7 @@ const CompetDetail = () => {
                       <TopBox>
                         <div>
                           <img
-                            src={`${process.env.PUBLIC_URL}/images/2nddept.svg`}
+                            src={`${process.env.PUBLIC_URL}/static/images/2nddept.svg`}
                           />
                         </div>
                         <TopText>
@@ -418,7 +418,7 @@ const CompetDetail = () => {
                       <TopBox>
                         <div>
                           <img
-                            src={`${process.env.PUBLIC_URL}/images/3rddept.svg`}
+                            src={`${process.env.PUBLIC_URL}/static/images/3rddept.svg`}
                           />
                         </div>
                         <TopText>
@@ -441,7 +441,7 @@ const CompetDetail = () => {
                       <RankBox>
                         <div>
                           <img
-                            src={`${process.env.PUBLIC_URL}/images/littlebox.svg`}
+                            src={`${process.env.PUBLIC_URL}/static/images/littlebox.svg`}
                           />
                         </div>
                         <RankText>
@@ -461,7 +461,7 @@ const CompetDetail = () => {
                       <RankBox>
                         <div>
                           <img
-                            src={`${process.env.PUBLIC_URL}/images/littlebox.svg`}
+                            src={`${process.env.PUBLIC_URL}/static/images/littlebox.svg`}
                           />
                         </div>
                         <RankText>
@@ -481,7 +481,7 @@ const CompetDetail = () => {
                       <RankBox>
                         <div>
                           <img
-                            src={`${process.env.PUBLIC_URL}/images/littlebox.svg`}
+                            src={`${process.env.PUBLIC_URL}/static/images/littlebox.svg`}
                           />
                         </div>
                         <RankText>
@@ -501,7 +501,7 @@ const CompetDetail = () => {
                       <RankBox>
                         <div>
                           <img
-                            src={`${process.env.PUBLIC_URL}/images/littlebox.svg`}
+                            src={`${process.env.PUBLIC_URL}/static/images/littlebox.svg`}
                           />
                         </div>
                         <RankText>
@@ -521,7 +521,7 @@ const CompetDetail = () => {
                       <RankBox>
                         <div>
                           <img
-                            src={`${process.env.PUBLIC_URL}/images/littlebox.svg`}
+                            src={`${process.env.PUBLIC_URL}/static/images/littlebox.svg`}
                           />
                         </div>
                         <RankText>
@@ -541,7 +541,7 @@ const CompetDetail = () => {
                       <RankBox>
                         <div>
                           <img
-                            src={`${process.env.PUBLIC_URL}/images/littlebox.svg`}
+                            src={`${process.env.PUBLIC_URL}/static/images/littlebox.svg`}
                           />
                         </div>
                         <RankText>
@@ -567,7 +567,7 @@ const CompetDetail = () => {
         <Footer>
           <Left>
             <img
-              src={`${process.env.PUBLIC_URL}/images/footer-left.png`}
+              src={`${process.env.PUBLIC_URL}/static/images/footer-left.png`}
               width="55px"
               alt="footer"
             />
@@ -575,7 +575,7 @@ const CompetDetail = () => {
           <FooterContentWrapper>
             <Base>
               <img
-                src={`${process.env.PUBLIC_URL}/images/footer-base.png`}
+                src={`${process.env.PUBLIC_URL}/static/images/footer-base.png`}
                 width="100%"
                 height="148px"
                 alt="footer"
@@ -588,7 +588,7 @@ const CompetDetail = () => {
               </ManagementWrapper>
               <Line>
                 <img
-                  src={`${process.env.PUBLIC_URL}/images/footer-line.png`}
+                  src={`${process.env.PUBLIC_URL}/static/images/footer-line.png`}
                   width="253px"
                   alt="footer"
                 />
@@ -599,7 +599,7 @@ const CompetDetail = () => {
               </FestivalWrapper>
               <Line>
                 <img
-                  src={`${process.env.PUBLIC_URL}/images/footer-line.png`}
+                  src={`${process.env.PUBLIC_URL}/static/images/footer-line.png`}
                   width="253px"
                   alt="footer"
                 />
@@ -612,7 +612,7 @@ const CompetDetail = () => {
           </FooterContentWrapper>
           <Right>
             <img
-              src={`${process.env.PUBLIC_URL}/images/footer-right.png`}
+              src={`${process.env.PUBLIC_URL}/static/images/footer-right.png`}
               width="55px"
               alt="footer"
             />
