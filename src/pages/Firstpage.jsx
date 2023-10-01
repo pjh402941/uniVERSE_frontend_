@@ -334,7 +334,7 @@ const Firstpage = () => {
             </div>
           </div>
 
-          <div style={{ height: "250px" }}></div>
+          <div style={{ height: "180px" }}></div>
           {/* 단과대항전 행성 */}
           <div
             className="competition"
