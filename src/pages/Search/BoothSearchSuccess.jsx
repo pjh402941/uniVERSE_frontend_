@@ -58,7 +58,7 @@ const Body = styled.div`
   padding: 0 5.5%;
 `;
 const SearchWrapper = styled.div`
-  width: 315px;
+  width: 100%;
   height: 30px;
   border: 1px solid #4fdfff;
   background: #152e46;
@@ -165,6 +165,7 @@ const BoothContent = styled.div`
   padding-left: 8px;
 `;
 const BoothName = styled.div`
+  width: 50vw;
   color: #4fdfff;
   font-size: 15px;
   font-weight: 700;
@@ -177,7 +178,7 @@ const BoothName = styled.div`
 `;
 const Boothintro = styled.div`
   color: #fff;
-  font-size: 4px;
+  font-size: 12px;
   font-weight: 100;
   text-align: left;
   position: absolute;
@@ -310,7 +311,10 @@ const BoothSearchSuccess = () => {
   const [name, setName] = useState("");
   const [booths, setBooths] = useState([]);
   const [boothCount, setboothCount] = useState([]);
-  const BACKEND_URL = "http://3.36.142.19" || "ec2-3-36-142-19.ap-northeast-2.compute.amazonaws.com" || "127.0.0.1:8000";
+  const BACKEND_URL =
+    "http://3.36.142.19" ||
+    "ec2-3-36-142-19.ap-northeast-2.compute.amazonaws.com" ||
+    "127.0.0.1:8000";
   const handleNameInputChange = (event) => {
     setName(event.target.value);
   };
