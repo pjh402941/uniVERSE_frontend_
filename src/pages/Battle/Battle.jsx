@@ -16,7 +16,7 @@ const Container = styled.div`
   scrollbar-width: none;
 
   background-image: url(${process.env
-    .PUBLIC_URL}/images/단과대항전배경.png); /* 배경 이미지 경로 설정 */
+    .PUBLIC_URL}/static/images/단과대항전배경.png); /* 배경 이미지 경로 설정 */
   background-size: cover; /* 배경 이미지 크기 조절 */
   background-position: center; /* 배경 이미지 위치 조절 */
 
@@ -174,7 +174,7 @@ const College = styled.select`
   margin-top: 50px;
   outline: none;
   appearance: none;
-  background: url("${process.env.PUBLIC_URL}/images/down-one.png") no-repeat
+  background: url("${process.env.PUBLIC_URL}/static/images/down-one.png") no-repeat
     right 14px center;
   background-color: white;
   background-size: 48px 48px; /* 원하는 너비와 높이로 설정하세요 */
@@ -349,12 +349,13 @@ const Battle = () => {
   const [postList, setPostList] = useState([]); // 배열에 받아서 저장
   const [loading, setLoading] = useState(false);
 
+  const BACKEND_URL = "http://3.36.142.19" || "ec2-3-36-142-19.ap-northeast-2.compute.amazonaws.com" || "127.0.0.1:8000";
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
       try {
         // API 호출
-        const response = await axios.get("http://127.0.0.1:8000/competition/");
+        const response = await axios.get(`${BACKEND_URL}/competition/`);
         setPostList(response.data.collegeRank); //collegeRank 배열 저장
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -367,7 +368,7 @@ const Battle = () => {
   const onParticipationClick = async () => {
     try {
       // 선택한 단과대학과 학번을 서버로 보내기
-      const response = await axios.post("http://127.0.0.1:8000/student-info/", {
+      const response = await axios.post(`${BACKEND_URL}/student-info/`, {
         college: selectedCollege,
         stuId,
       });
@@ -393,7 +394,7 @@ const Battle = () => {
       <TopBar>
         <Back onClick={onClickBtn}>
           <img
-            src={`${process.env.PUBLIC_URL}/images/backbtn.png`}
+            src={`${process.env.PUBLIC_URL}/static/images/backbtn.png`}
             alt="back"
             width="24px"
           />
@@ -405,7 +406,7 @@ const Battle = () => {
         {loading ? (
           <div style={loadingStyle}>
             <img
-              src="/images/loading.gif"
+              src="/static/images/loading.gif"
               alt="로딩 중"
               width="50px"
               height="50px"
@@ -417,7 +418,7 @@ const Battle = () => {
             <Body>
               <TopBox>
                 <img
-                  src={`${process.env.PUBLIC_URL}/images/Union.png`}
+                  src={`${process.env.PUBLIC_URL}/static/images/Union.png`}
                   alt="back"
                   width="197.451px"
                   height="39.774px"
@@ -434,7 +435,7 @@ const Battle = () => {
                   <TopBox2>
                     <ImgBox>
                       <img
-                        src={`${process.env.PUBLIC_URL}/images/1stdept.svg`}
+                        src={`${process.env.PUBLIC_URL}/static/images/1stdept.svg`}
                       />
                     </ImgBox>
                     <TopText>
@@ -450,7 +451,7 @@ const Battle = () => {
                   <TopBox2>
                     <div>
                       <img
-                        src={`${process.env.PUBLIC_URL}/images/2nddept.svg`}
+                        src={`${process.env.PUBLIC_URL}/static/images/2nddept.svg`}
                       />
                     </div>
                     <TopText>
@@ -466,7 +467,7 @@ const Battle = () => {
                   <TopBox2>
                     <div>
                       <img
-                        src={`${process.env.PUBLIC_URL}/images/3rddept.svg`}
+                        src={`${process.env.PUBLIC_URL}/static/images/3rddept.svg`}
                       />
                     </div>
                     <TopText>
@@ -519,7 +520,7 @@ const Battle = () => {
       <Footer>
         <Left>
           <img
-            src={`${process.env.PUBLIC_URL}/images/footer-left.png`}
+            src={`${process.env.PUBLIC_URL}/static/images/footer-left.png`}
             width="55px"
             alt="footer"
           />
@@ -527,7 +528,7 @@ const Battle = () => {
         <FooterContentWrapper>
           <Base>
             <img
-              src={`${process.env.PUBLIC_URL}/images/footer-base.png`}
+              src={`${process.env.PUBLIC_URL}/static/images/footer-base.png`}
               width="100%"
               height="148px"
               alt="footer"
@@ -540,7 +541,7 @@ const Battle = () => {
             </ManagementWrapper>
             <Line>
               <img
-                src={`${process.env.PUBLIC_URL}/images/footer-line.png`}
+                src={`${process.env.PUBLIC_URL}/static/images/footer-line.png`}
                 width="253px"
                 alt="footer"
               />
@@ -551,7 +552,7 @@ const Battle = () => {
             </FestivalWrapper>
             <Line>
               <img
-                src={`${process.env.PUBLIC_URL}/images/footer-line.png`}
+                src={`${process.env.PUBLIC_URL}/static/images/footer-line.png`}
                 width="253px"
                 alt="footer"
               />
@@ -564,7 +565,7 @@ const Battle = () => {
         </FooterContentWrapper>
         <Right>
           <img
-            src={`${process.env.PUBLIC_URL}/images/footer-right.png`}
+            src={`${process.env.PUBLIC_URL}/static/images/footer-right.png`}
             width="55px"
             alt="footer"
           />

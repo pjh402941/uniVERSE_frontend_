@@ -219,7 +219,7 @@ const BoothSearchFail = () => {
           <Topbar>
             <Back>
               <img
-                src={`${process.env.PUBLIC_URL}/images/backbtn.png`}
+                src={`${process.env.PUBLIC_URL}/static/images/backbtn.png`}
                 width="24px"
                 height="24px"
                 onClick={() => navigateToBack()}
@@ -232,7 +232,7 @@ const BoothSearchFail = () => {
               <Search placeholder="부스 이름을 검색하세요." />
               <SearchButton>
                 <img
-                  src={`${process.env.PUBLIC_URL}/images/search-button.png`}
+                  src={`${process.env.PUBLIC_URL}/static/images/search-button.png`}
                   width="17px"
                   height="17px"
                 />
@@ -261,7 +261,7 @@ const BoothSearchFail = () => {
               </DateWrapper>
               <Line>
                 <img
-                  src={`${process.env.PUBLIC_URL}/images/footer-line.png`}
+                  src={`${process.env.PUBLIC_URL}/static/images/footer-line.png`}
                   width="100%"
                   height="1px"
                   alt="footer"
@@ -274,7 +274,7 @@ const BoothSearchFail = () => {
         <Footer>
           <Left>
             <img
-              src={`${process.env.PUBLIC_URL}/images/footer-left.png`}
+              src={`${process.env.PUBLIC_URL}/static/images/footer-left.png`}
               width="55px"
               alt="footer"
             />
@@ -282,7 +282,7 @@ const BoothSearchFail = () => {
           <FooterContentWrapper>
             <Base>
               <img
-                src={`${process.env.PUBLIC_URL}/images/footer-base.png`}
+                src={`${process.env.PUBLIC_URL}/static/images/footer-base.png`}
                 width="100%"
                 height="148px"
                 alt="footer"
@@ -295,7 +295,7 @@ const BoothSearchFail = () => {
               </ManagementWrapper>
               <Line>
                 <img
-                  src={`${process.env.PUBLIC_URL}/images/footer-line.png`}
+                  src={`${process.env.PUBLIC_URL}/static/images/footer-line.png`}
                   width="253px"
                   alt="footer"
                 />
@@ -306,7 +306,7 @@ const BoothSearchFail = () => {
               </FestivalWrapper>
               <Line>
                 <img
-                  src={`${process.env.PUBLIC_URL}/images/footer-line.png`}
+                  src={`${process.env.PUBLIC_URL}/static/images/footer-line.png`}
                   width="253px"
                   alt="footer"
                 />
@@ -319,7 +319,7 @@ const BoothSearchFail = () => {
           </FooterContentWrapper>
           <Right>
             <img
-              src={`${process.env.PUBLIC_URL}/images/footer-right.png`}
+              src={`${process.env.PUBLIC_URL}/static/images/footer-right.png`}
               width="55px"
               alt="footer"
             />
