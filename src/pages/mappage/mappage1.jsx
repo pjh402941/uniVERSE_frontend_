@@ -215,7 +215,7 @@ const Mappage1 = () => {
             <FooterContent>
               <ManagementWrapper>
                 <p className="bold">축제 총 기획</p>
-                <p>동덕여대 축제 준비 위원회</p>
+                <p>동덕여대 축제 운영 위원회</p>
               </ManagementWrapper>
               <Line>
                 <img
