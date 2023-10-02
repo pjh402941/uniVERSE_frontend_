@@ -8,7 +8,6 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  width: 100%;
   position: relative;
   text-align: center;
   background: var(--purple-4, #0a0047);
