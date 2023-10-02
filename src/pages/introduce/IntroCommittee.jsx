@@ -246,13 +246,13 @@ const IntroCommittee = () => {
     fontWeight: "400",
     lineHeight: "normal",
   };
-
+  
   return (
     <Container>
       <Topbar>
         <Back>
           <img
-            src={`${process.env.PUBLIC_URL}/images/backbtn.png`}
+            src={`${process.env.PUBLIC_URL}/static/images/backbtn.png`}
             width="24px"
             height="24px"
             onClick={() => GoBack()}
@@ -301,7 +301,7 @@ const IntroCommittee = () => {
 
             <TopBox>
               <img
-                src={`${process.env.PUBLIC_URL}/images/CommitLogo.png`}
+                src={`${process.env.PUBLIC_URL}/static/images/CommitLogo.png`}
                 width="73%"
                 style={{ marginTop: "0%" }}
               />
@@ -350,7 +350,7 @@ const IntroCommittee = () => {
             </ContentBox>
 
             <img
-              src={`${process.env.PUBLIC_URL}/images/FrameCommittee.png`}
+              src={`${process.env.PUBLIC_URL}/static/images/FrameCommittee.png`}
               style={{ maxWidth: "88%", height: "auto" }}
             />
           </div>
@@ -359,7 +359,7 @@ const IntroCommittee = () => {
       <Footer>
         <Left>
           <img
-            src={`${process.env.PUBLIC_URL}/images/footer-left.png`}
+            src={`${process.env.PUBLIC_URL}/static/images/footer-left.png`}
             width="55px"
             alt="footer"
           />
@@ -367,7 +367,7 @@ const IntroCommittee = () => {
         <FooterContentWrapper>
           <Base>
             <img
-              src={`${process.env.PUBLIC_URL}/images/footer-base.png`}
+              src={`${process.env.PUBLIC_URL}/static/images/footer-base.png`}
               width="100%"
               height="148px"
               alt="footer"
@@ -380,7 +380,7 @@ const IntroCommittee = () => {
             </ManagementWrapper>
             <Line>
               <img
-                src={`${process.env.PUBLIC_URL}/images/footer-line.png`}
+                src={`${process.env.PUBLIC_URL}/static/images/footer-line.png`}
                 width="253px"
                 alt="footer"
               />
@@ -391,7 +391,7 @@ const IntroCommittee = () => {
             </FestivalWrapper>
             <Line>
               <img
-                src={`${process.env.PUBLIC_URL}/images/footer-line.png`}
+                src={`${process.env.PUBLIC_URL}/static/images/footer-line.png`}
                 width="253px"
                 alt="footer"
               />
@@ -404,7 +404,7 @@ const IntroCommittee = () => {
         </FooterContentWrapper>
         <Right>
           <img
-            src={`${process.env.PUBLIC_URL}/images/footer-right.png`}
+            src={`${process.env.PUBLIC_URL}/static/images/footer-right.png`}
             width="55px"
             alt="footer"
           />

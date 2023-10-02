@@ -225,7 +225,7 @@ const Boothdetail = () => {
   //axios_backend 연동작업 시작
   const [Booth, setBooth] = useState([]);
   const { boothId } = useParams(); // 경로 파라미터 값 가져오기
-  const BACKEND_URL = "http://127.0.0.1:8000";
+  const BACKEND_URL = "http://3.36.142.19" || "ec2-3-36-142-19.ap-northeast-2.compute.amazonaws.com" || "127.0.0.1:8000";
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -260,7 +260,7 @@ const Boothdetail = () => {
             <Topbar>
               <Back>
                 <img
-                  src={`${process.env.PUBLIC_URL}/images/backbtn.png`}
+                  src={`${process.env.PUBLIC_URL}/static/images/backbtn.png`}
                   width="24px"
                   height="24px"
                   onClick={() => navigateToBack()}
@@ -270,7 +270,7 @@ const Boothdetail = () => {
             {loading ? (
               <div style={loadingStyle}>
                 <img
-                  src="/images/loading.gif"
+                  src="/static/images/loading.gif"
                   alt="로딩 중"
                   width="50px"
                   height="50px"
@@ -296,7 +296,7 @@ const Boothdetail = () => {
                     <Detail_detail>
                       <Time>
                         <img
-                          src={`${process.env.PUBLIC_URL}/images/timeicon.png`}
+                          src={`${process.env.PUBLIC_URL}/static/images/timeicon.png`}
                           width="14px"
                           height="17px"
                           alt="timeicon"
@@ -305,7 +305,7 @@ const Boothdetail = () => {
                       </Time>
                       <Place>
                         <img
-                          src={`${process.env.PUBLIC_URL}/images/placeicon.png`}
+                          src={`${process.env.PUBLIC_URL}/static/images/placeicon.png`}
                           width="13.993px"
                           height="17px"
                           alt="placeicon"
@@ -322,7 +322,7 @@ const Boothdetail = () => {
         <Footer>
           <Left>
             <img
-              src={`${process.env.PUBLIC_URL}/images/footer-left.png`}
+              src={`${process.env.PUBLIC_URL}/static/images/footer-left.png`}
               width="55px"
               alt="footer"
             />
@@ -330,7 +330,7 @@ const Boothdetail = () => {
           <FooterContentWrapper>
             <Base>
               <img
-                src={`${process.env.PUBLIC_URL}/images/footer-base.png`}
+                src={`${process.env.PUBLIC_URL}/static/images/footer-base.png`}
                 width="100%"
                 height="148px"
                 alt="footer"
@@ -343,7 +343,7 @@ const Boothdetail = () => {
               </ManagementWrapper>
               <Line>
                 <img
-                  src={`${process.env.PUBLIC_URL}/images/footer-line.png`}
+                  src={`${process.env.PUBLIC_URL}/static/images/footer-line.png`}
                   width="253px"
                   alt="footer"
                 />
@@ -354,7 +354,7 @@ const Boothdetail = () => {
               </FestivalWrapper>
               <Line>
                 <img
-                  src={`${process.env.PUBLIC_URL}/images/footer-line.png`}
+                  src={`${process.env.PUBLIC_URL}/static/images/footer-line.png`}
                   width="253px"
                   alt="footer"
                 />
@@ -367,7 +367,7 @@ const Boothdetail = () => {
           </FooterContentWrapper>
           <Right>
             <img
-              src={`${process.env.PUBLIC_URL}/images/footer-right.png`}
+              src={`${process.env.PUBLIC_URL}/static/images/footer-right.png`}
               width="55px"
               alt="footer"
             />

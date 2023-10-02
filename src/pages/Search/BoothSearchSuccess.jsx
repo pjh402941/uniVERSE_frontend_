@@ -58,7 +58,7 @@ const Body = styled.div`
   padding: 0 5.5%;
 `;
 const SearchWrapper = styled.div`
-  width: 315px;
+  width: 100%;
   height: 30px;
   border: 1px solid #4fdfff;
   background: #152e46;
@@ -165,6 +165,7 @@ const BoothContent = styled.div`
   padding-left: 8px;
 `;
 const BoothName = styled.div`
+  width: 50vw;
   color: #4fdfff;
   font-size: 15px;
   font-weight: 700;
@@ -177,7 +178,7 @@ const BoothName = styled.div`
 `;
 const Boothintro = styled.div`
   color: #fff;
-  font-size: 4px;
+  font-size: 12px;
   font-weight: 100;
   text-align: left;
   position: absolute;
@@ -310,8 +311,10 @@ const BoothSearchSuccess = () => {
   const [name, setName] = useState("");
   const [booths, setBooths] = useState([]);
   const [boothCount, setboothCount] = useState([]);
-  const BACKEND_URL = "http://127.0.0.1:8000"; // 실제 백엔드 서버 주소로 변경해야 합니다.
-
+  const BACKEND_URL =
+    "http://3.36.142.19" ||
+    "ec2-3-36-142-19.ap-northeast-2.compute.amazonaws.com" ||
+    "127.0.0.1:8000";
   const handleNameInputChange = (event) => {
     setName(event.target.value);
   };
@@ -389,7 +392,7 @@ const BoothSearchSuccess = () => {
           <Topbar>
             <Back>
               <img
-                src={`${process.env.PUBLIC_URL}/images/backbtn.png`}
+                src={`${process.env.PUBLIC_URL}/static/images/backbtn.png`}
                 width="24px"
                 height="24px"
                 onClick={navigateToBack}
@@ -409,7 +412,7 @@ const BoothSearchSuccess = () => {
               />
               <SearchButton onClick={handleNameButtonClick}>
                 <img
-                  src={`${process.env.PUBLIC_URL}/images/search-button.png`}
+                  src={`${process.env.PUBLIC_URL}/static/images/search-button.png`}
                   width="17px"
                   height="17px"
                   alt="검색"
@@ -441,7 +444,7 @@ const BoothSearchSuccess = () => {
               </DateWrapper>
               <Line>
                 <img
-                  src={`${process.env.PUBLIC_URL}/images/footer-line.png`}
+                  src={`${process.env.PUBLIC_URL}/static/images/footer-line.png`}
                   width="100%"
                   height="1px"
                   alt="footer"
@@ -450,7 +453,7 @@ const BoothSearchSuccess = () => {
               {loading ? (
                 <div style={loadingStyle}>
                   <img
-                    src="/images/loading.gif"
+                    src="/static/images/loading.gif"
                     alt="로딩 중"
                     width="50px"
                     height="50px"
@@ -503,7 +506,7 @@ const BoothSearchSuccess = () => {
         <Footer>
           <Left>
             <img
-              src={`${process.env.PUBLIC_URL}/images/footer-left.png`}
+              src={`${process.env.PUBLIC_URL}/static/images/footer-left.png`}
               width="55px"
               alt="footer"
             />
@@ -511,7 +514,7 @@ const BoothSearchSuccess = () => {
           <FooterContentWrapper>
             <Base>
               <img
-                src={`${process.env.PUBLIC_URL}/images/footer-base.png`}
+                src={`${process.env.PUBLIC_URL}/static/images/footer-base.png`}
                 width="100%"
                 height="148px"
                 alt="footer"
@@ -524,7 +527,7 @@ const BoothSearchSuccess = () => {
               </ManagementWrapper>
               <Line>
                 <img
-                  src={`${process.env.PUBLIC_URL}/images/footer-line.png`}
+                  src={`${process.env.PUBLIC_URL}/static/images/footer-line.png`}
                   width="253px"
                   alt="footer"
                 />
@@ -535,7 +538,7 @@ const BoothSearchSuccess = () => {
               </FestivalWrapper>
               <Line>
                 <img
-                  src={`${process.env.PUBLIC_URL}/images/footer-line.png`}
+                  src={`${process.env.PUBLIC_URL}/static/images/footer-line.png`}
                   width="253px"
                   alt="footer"
                 />
@@ -548,7 +551,7 @@ const BoothSearchSuccess = () => {
           </FooterContentWrapper>
           <Right>
             <img
-              src={`${process.env.PUBLIC_URL}/images/footer-right.png`}
+              src={`${process.env.PUBLIC_URL}/static/images/footer-right.png`}
               width="55px"
               alt="footer"
             />
