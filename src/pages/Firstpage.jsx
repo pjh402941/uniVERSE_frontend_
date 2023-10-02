@@ -334,11 +334,11 @@ const Firstpage = () => {
             </div>
           </div>
 
-          <div style={{ height: "180px" }}></div>
+          <div style={{ height: "200px" }}></div>
           {/* 단과대항전 행성 */}
           <div
             className="competition"
-            style={{ height: "250px", marginTop: "230px" }}
+            style={{ height: "250px", marginTop: "100px" }}
           >
             <div className="competition_planet">
               <img
